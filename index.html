@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Binär & Hex – Werkstattheft</title>
+<title>Binär & Hex - Lernheft</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
 
@@ -396,11 +396,10 @@
 
 <div class="wrap">
 
-  <!-- ============ BINÄR ============ -->
   <div id="panel-bin" role="tabpanel" aria-labelledby="tab-bin">
 
     <section style="padding-top:36px">
-      <p class="lede">Acht Schalter, zwei Zustände. Klick dich durch und beobachte, wie sich der Dezimalwert verändert – dann geht es unten weiter mit Erklärung und Übungsaufgaben.</p>
+      <p class="lede">Acht Schalter, zwei Zustände. Klick dich durch und beobachte, wie sich der Dezimalwert verändert - dann geht es unten weiter mit Erklärung und Übungsaufgaben.</p>
 
       <div class="demo-card">
         <p class="demo-label">Interaktiv: 1 Byte, Bit für Bit</p>
@@ -426,8 +425,8 @@
 
     <section>
       <h2>Was ist das Binärsystem?</h2>
-      <p>Unser normales Zahlensystem hat die Basis 10 – zehn Ziffern, 0 bis 9. Jede Stelle einer Zahl ist das Zehnfache der Stelle rechts daneben: Einer, Zehner, Hunderter.</p>
-      <p>Das Binärsystem hat die Basis 2. Es gibt nur zwei Ziffern, 0 und 1, und jede Stelle ist das <strong>Doppelte</strong> der Stelle rechts daneben – genau das, was die Schalter oben zeigen.</p>
+      <p>Unser normales Zahlensystem hat die Basis 10 - zehn Ziffern, 0 bis 9. Jede Stelle einer Zahl ist das Zehnfache der Stelle rechts daneben: Einer, Zehner, Hunderter.</p>
+      <p>Das Binärsystem hat die Basis 2. Es gibt nur zwei Ziffern, 0 und 1, und jede Stelle ist das <strong>Doppelte</strong> der Stelle rechts daneben - genau das, was die Schalter oben zeigen.</p>
 
       <div class="chip-row" aria-hidden="true">
         <div class="chip"><span class="val">128</span></div>
@@ -513,7 +512,7 @@
         <div class="level">
           <div class="level-badge">1</div>
           <h3>Dezimal → Binär</h3>
-          <p class="level-desc">Einfacher Einstieg – kleine Zahlen umwandeln.</p>
+          <p class="level-desc">Einfacher Einstieg - kleine Zahlen umwandeln.</p>
 
           <div class="task">
             <div class="task-q"><p>5</p><span class="num">1 von 3</span></div>
@@ -581,14 +580,14 @@
         <div class="level">
           <div class="level-badge">5</div>
           <h3>Bonus</h3>
-          <p class="level-desc">Etwas kniffliger – kombiniert Umwandlung, Addition und Kontrolle.</p>
+          <p class="level-desc">Etwas kniffliger - kombiniert Umwandlung, Addition und Kontrolle.</p>
 
           <div class="task">
             <div class="task-q"><p>Rechne 19 + 6 binär: erst beide Zahlen umwandeln, dann binär addieren, dann das Ergebnis zur Kontrolle zurück in Dezimal umwandeln.</p></div>
             <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer">19 = <span class="mono">10011</span>, 6 = <span class="mono">00110</span><br>10011 + 00110 = <span class="mono">11001</span><br>Kontrolle: 19 + 6 = 25, und 11001 = 16 + 8 + 0 + 0 + 1 = 25 ✓</div></details>
           </div>
           <div class="task">
-            <div class="task-q"><p>Stimmt diese Behauptung? „1010 + 1010 = 10101" – nachrechnen und gegebenenfalls korrigieren.</p></div>
+            <div class="task-q"><p>Stimmt diese Behauptung? „1010 + 1010 = 10101" - nachrechnen und gegebenenfalls korrigieren.</p></div>
             <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer">Falsch. 1010 = 10, also 10 + 10 = 20. 20 in Binär ist <span class="mono">10100</span> (16 + 4), nicht 10101.</div></details>
           </div>
 
@@ -634,14 +633,14 @@
         <div class="chip"><span class="val">F</span><span class="place">15</span></div>
       </div>
 
-      <p style="margin-top:18px">Warum das in der IT wichtig ist: Ein Byte hat, wie im Binär-Tab gezeigt, 8 Bits. Genau 4 Bits (ein „Nibble") reichen aus, um alle 16 Hex-Ziffern darzustellen – also entsprechen <strong>2 Hex-Ziffern immer genau 1 Byte</strong>. Deshalb tauchen Hex-Zahlen überall auf: Farbcodes wie <span class="mono">#1C2E22</span>, MAC-Adressen, Speicheradressen, Fehlercodes.</p>
+      <p style="margin-top:18px">Warum das in der IT wichtig ist: Ein Byte hat, wie im Binär-Tab gezeigt, 8 Bits. Genau 4 Bits (ein „Nibble") reichen aus, um alle 16 Hex-Ziffern darzustellen - also entsprechen <strong>2 Hex-Ziffern immer genau 1 Byte</strong>. Deshalb tauchen Hex-Zahlen überall auf: Farbcodes wie <span class="mono">#1C2E22</span>, MAC-Adressen, Speicheradressen, Fehlercodes.</p>
     </section>
 
     <hr class="divider">
 
     <section>
       <h2>Dezimal → Hex umwandeln</h2>
-      <p>Fortlaufend durch 16 teilen, die Reste von unten nach oben ablesen – Reste ab 10 werden zu Buchstaben. Beispiel: 200.</p>
+      <p>Fortlaufend durch 16 teilen, die Reste von unten nach oben ablesen - Reste ab 10 werden zu Buchstaben. Beispiel: 200.</p>
 
       <div class="calc-steps">
         <div>200 ÷ 16 = 12 &nbsp;Rest <strong>8</strong></div>
@@ -667,7 +666,7 @@
 
     <section>
       <h2>Hex ↔ Binär: der 4er-Gruppen-Trick</h2>
-      <p>Weil 1 Hex-Ziffer genau 4 Bits entspricht, kann man jede Binärzahl von rechts in 4er-Gruppen aufteilen und jede Gruppe einzeln übersetzen – ganz ohne den Umweg über Dezimal.</p>
+      <p>Weil 1 Hex-Ziffer genau 4 Bits entspricht, kann man jede Binärzahl von rechts in 4er-Gruppen aufteilen und jede Gruppe einzeln übersetzen - ganz ohne den Umweg über Dezimal.</p>
 
       <div class="calc-steps">
         <div>10101011 &nbsp;→&nbsp; Gruppen: <strong>1010</strong> &nbsp;<strong>1011</strong></div>
@@ -723,7 +722,7 @@
         <div class="level">
           <div class="level-badge">1</div>
           <h3>Dezimal → Hex</h3>
-          <p class="level-desc">Einfacher Einstieg – kleine Zahlen umwandeln.</p>
+          <p class="level-desc">Einfacher Einstieg - kleine Zahlen umwandeln.</p>
 
           <div class="task">
             <div class="task-q"><p>10</p><span class="num">1 von 3</span></div>
@@ -791,14 +790,14 @@
         <div class="level">
           <div class="level-badge">5</div>
           <h3>Bonus</h3>
-          <p class="level-desc">Etwas kniffliger – kombiniert Umwandlung, Addition und Kontrolle.</p>
+          <p class="level-desc">Etwas kniffliger - kombiniert Umwandlung, Addition und Kontrolle.</p>
 
           <div class="task">
             <div class="task-q"><p>Rechne 200 + 55 als Hex: erst beide Zahlen umwandeln, dann hex addieren, dann zur Kontrolle zurück in Dezimal umwandeln.</p></div>
             <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer">200 = <span class="mono">C8</span>, 55 = <span class="mono">37</span><br>C8 + 37 = <span class="mono">FF</span><br>Kontrolle: 200 + 55 = 255, und FF = 15 × 16 + 15 = 255 ✓</div></details>
           </div>
           <div class="task">
-            <div class="task-q"><p>Stimmt diese Behauptung? „4C + 1F = 6C" – nachrechnen und gegebenenfalls korrigieren.</p></div>
+            <div class="task-q"><p>Stimmt diese Behauptung? „4C + 1F = 6C" - nachrechnen und gegebenenfalls korrigieren.</p></div>
             <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer">Falsch. 4C = 76, 1F = 31, 76 + 31 = 107. 107 in Hex ist <span class="mono">6B</span> (6 × 16 + 11), nicht 6C.</div></details>
           </div>
 
