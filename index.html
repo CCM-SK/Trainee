@@ -3,10 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Binär & Hex - Lernheft</title>
+<title>Binär, Hex & Oktal - Lernheft</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
-
   :root{
     --bg: #16241C;
     --bg-raised: #1C2E22;
@@ -18,10 +17,8 @@
     --off: #263A2C;
     --off-text: #6C8074;
   }
-
   *{ box-sizing: border-box; }
   html{ scroll-behavior: smooth; }
-
   body{
     margin: 0;
     background: var(--bg);
@@ -31,61 +28,48 @@
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
   }
-
   .mono{ font-family: 'IBM Plex Mono', monospace; }
   a{ color: var(--amber); }
-
   button:focus-visible,
   summary:focus-visible,
   a:focus-visible{
     outline: 2px solid var(--amber);
     outline-offset: 3px;
   }
-
   .wrap{
     max-width: 640px;
     margin: 0 auto;
     padding: 0 24px 80px;
   }
-
   section{ padding-top: 52px; }
-
   h2{ font-size: 1.3rem; font-weight: 600; margin: 0 0 4px; }
   h3{ font-size: 1.05rem; font-weight: 600; margin: 28px 0 8px; }
   p{ margin: 0 0 14px; }
-
   .lede{ color: var(--ink-dim); max-width: 46ch; }
-
   .divider{
     border: none;
     height: 1px;
     background: var(--copper-line);
     margin: 52px 0 0;
   }
-
   .hero{
     background: var(--bg-raised);
     padding: 56px 24px 0;
     border-bottom: 1px solid var(--copper-line);
   }
-
   .hero-inner{ max-width: 640px; margin: 0 auto; }
-
   .hero h1{
     font-size: 2rem;
     font-weight: 700;
     letter-spacing: -0.01em;
     margin: 0 0 10px;
   }
-
   .hero p{ color: var(--ink-dim); max-width: 42ch; margin: 0 0 30px; }
-
   .tabs{
     display: flex;
     gap: 30px;
     margin: 0;
   }
-
   .tab{
     background: none;
     border: none;
@@ -97,9 +81,7 @@
     cursor: pointer;
     position: relative;
   }
-
   .tab[aria-selected="true"]{ color: var(--ink); }
-
   .tab[aria-selected="true"]::after{
     content: "";
     position: absolute;
@@ -107,7 +89,6 @@
     height: 2px;
     background: var(--amber);
   }
-
   .demo-card{
     background: var(--bg-raised);
     border: 1px solid var(--copper-line);
@@ -115,19 +96,16 @@
     padding: 26px 24px 22px;
     margin: 28px 0 10px;
   }
-
   .demo-card .demo-label{
     font-size: 0.8rem;
     color: var(--off-text);
     margin: 0 0 18px;
   }
-
   .bit-row{
     display: grid;
     grid-template-columns: repeat(8, 1fr);
     gap: 6px;
   }
-
   .bit-switch{
     aspect-ratio: 1 / 1.15;
     background: var(--off);
@@ -140,23 +118,19 @@
     cursor: pointer;
     transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
   }
-
   .bit-switch.is-on{ background: var(--amber); border-color: var(--amber); color: #241804; }
-
   .bit-labels{ margin-top: 8px; }
   .bit-labels span{
     display: block; text-align: center;
     font-family: 'IBM Plex Mono', monospace;
     font-size: 0.72rem; color: var(--off-text);
   }
-
   .demo-result{
     margin-top: 20px;
     font-family: 'IBM Plex Mono', monospace;
     font-size: 1.6rem;
     color: var(--ink-dim);
   }
-
   .demo-result span{ color: var(--amber); font-weight: 600; }
   .demo-result-sub{
     margin-top: 4px;
@@ -164,15 +138,12 @@
     font-size: 0.9rem;
     color: var(--off-text);
   }
-
   .demo-hint{ margin-top: 16px; font-size: 0.85rem; color: var(--off-text); }
-
   .hex-row{
     display: grid;
     grid-template-columns: repeat(2, 72px);
     gap: 10px;
   }
-
   .hex-dial{
     aspect-ratio: 1 / 1;
     background: var(--off);
@@ -185,22 +156,51 @@
     cursor: pointer;
     transition: border-color 0.15s ease;
   }
-
   .hex-dial:hover{ border-color: var(--amber); }
-
   .hex-labels{
     display: grid;
     grid-template-columns: repeat(2, 72px);
     gap: 10px;
     margin-top: 8px;
   }
-
   .hex-labels span{
     display: block; text-align: center;
     font-family: 'IBM Plex Mono', monospace;
     font-size: 0.72rem; color: var(--off-text);
   }
-
+  .perm-groups{
+    display: flex;
+    gap: 26px;
+    flex-wrap: wrap;
+  }
+  .perm-group{ text-align: center; }
+  .perm-group-label{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--off-text);
+    margin-bottom: 8px;
+  }
+  .perm-row{ display: flex; gap: 4px; }
+  .perm-switch{
+    width: 36px; height: 36px;
+    background: var(--off);
+    border: 1px solid var(--copper-line);
+    border-radius: 3px;
+    color: var(--off-text);
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  }
+  .perm-switch.is-on{ background: var(--amber); border-color: var(--amber); color: #241804; }
+  .perm-digit{
+    margin-top: 8px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--amber);
+  }
   .chip-row{
     display: grid;
     grid-template-columns: repeat(8, 1fr);
@@ -208,11 +208,9 @@
     max-width: 480px;
     margin: 18px 0 6px;
   }
-
   .chip-row.narrow{ grid-template-columns: repeat(4, 1fr); max-width: 260px; }
   .chip-row.six{ grid-template-columns: repeat(6, 1fr); max-width: 360px; }
   .chip-row + .chip-row{ margin-top: 6px; }
-
   .chip{
     text-align: center;
     padding: 10px 4px 8px;
@@ -220,18 +218,14 @@
     border-radius: 3px;
     background: var(--off);
   }
-
   .chip.on{ background: var(--amber); border-color: var(--amber); }
-
   .chip .val{
     display: block;
     font-family: 'IBM Plex Mono', monospace;
     font-weight: 600;
     color: var(--ink);
   }
-
   .chip.on .val{ color: #241804; }
-
   .chip .place{
     display: block;
     font-family: 'IBM Plex Mono', monospace;
@@ -239,14 +233,10 @@
     color: var(--off-text);
     margin-top: 4px;
   }
-
   .chip.on .place{ color: #4a3a10; }
-
   .sum-line{ font-family: 'IBM Plex Mono', monospace; color: var(--ink-dim); margin-top: 10px; }
   .sum-line strong{ color: var(--amber); }
-
   .calc-steps{ border-left: 2px solid var(--copper-line); padding-left: 18px; margin: 16px 0 20px; }
-
   .calc-steps div{
     font-family: 'IBM Plex Mono', monospace;
     font-size: 0.95rem;
@@ -254,7 +244,6 @@
     padding: 5px 0;
     position: relative;
   }
-
   .calc-steps div::before{
     content: "";
     position: absolute;
@@ -263,9 +252,7 @@
     border-radius: 50%;
     background: var(--copper);
   }
-
   .calc-steps div strong{ color: var(--ink); font-weight: 600; }
-
   .stack{
     background: var(--bg-raised);
     border: 1px solid var(--copper-line);
@@ -278,22 +265,17 @@
     white-space: pre;
     overflow-x: auto;
   }
-
   .stack .carry{ color: var(--copper); }
   .stack .result{ color: var(--amber); font-weight: 600; }
   .stack .rule{ border-top: 1px solid var(--copper-line); }
-
   .rules{
     list-style: none; padding: 0; margin: 14px 0 22px;
     font-family: 'IBM Plex Mono', monospace;
     font-size: 0.95rem; color: var(--ink-dim);
   }
-
   .rules li{ padding: 3px 0; }
   .rules li strong{ color: var(--ink); }
-
   .levels{ position: relative; padding-left: 34px; margin-top: 24px; }
-
   .levels::before{
     content: "";
     position: absolute;
@@ -301,9 +283,7 @@
     width: 1px;
     background: var(--copper-line);
   }
-
   .level{ position: relative; margin-bottom: 44px; }
-
   .level-badge{
     position: absolute; left: -34px; top: 0;
     width: 26px; height: 26px;
@@ -315,53 +295,41 @@
     font-size: 0.85rem; font-weight: 600;
     display: flex; align-items: center; justify-content: center;
   }
-
   .level h3{ margin: 0 0 4px; }
   .level .level-desc{ color: var(--ink-dim); font-size: 0.92rem; margin-bottom: 16px; }
-
   .task{ margin-bottom: 12px; border-bottom: 1px solid var(--copper-line); padding-bottom: 12px; }
   .task:last-child{ border-bottom: none; }
-
   .task-q{ display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
   .task-q p{ margin: 0; }
   .task-q .num{ font-family: 'IBM Plex Mono', monospace; font-size: 0.95rem; color: var(--ink-dim); }
-
   details{ margin-top: 8px; }
-
   summary{
     cursor: pointer; list-style: none;
     display: inline-flex; align-items: center; gap: 8px;
     font-size: 0.88rem; color: var(--ink-dim);
     user-select: none;
   }
-
   summary::-webkit-details-marker{ display: none; }
-
   summary .switch-dot{
     width: 9px; height: 9px; border-radius: 50%;
     background: var(--off-text);
     transition: background 0.15s ease;
     flex: none;
   }
-
   details[open] summary .switch-dot{ background: var(--amber); }
   details[open] summary{ color: var(--ink); }
-
   .answer{
     margin-top: 10px; padding: 12px 16px;
     background: var(--bg-raised);
     border-left: 2px solid var(--amber);
     font-size: 0.95rem; color: var(--ink-dim);
   }
-
   .answer .mono{ color: var(--ink); }
-
   footer{
     margin-top: 60px; padding-top: 20px;
     border-top: 1px solid var(--copper-line);
     color: var(--off-text); font-size: 0.88rem;
   }
-
   @media (max-width: 480px){
     .hero{ padding: 40px 20px 0; }
     .hero h1{ font-size: 1.6rem; }
@@ -370,8 +338,9 @@
     .demo-result{ font-size: 1.3rem; }
     .task-q{ flex-direction: column; gap: 4px; }
     .hex-row, .hex-labels{ grid-template-columns: repeat(2, 64px); }
+    .perm-groups{ gap: 16px; }
+    .perm-switch{ width: 32px; height: 32px; font-size: 0.82rem; }
   }
-
   @media (prefers-reduced-motion: reduce){
     *{ transition: none !important; scroll-behavior: auto !important; }
   }
@@ -382,21 +351,18 @@
 <div class="hero">
   <div class="hero-inner">
     <h1>Zahlensysteme</h1>
-    <p>Binär und Hexadezimal sind zwei verschiedene Schreibweisen für dieselbe Zahl. Ein Tab pro System, jeweils mit Erklärung, Beispielen und Übungsaufgaben.</p>
+    <p>Binär, Hexadezimal und Oktal sind drei verschiedene Schreibweisen für dieselbe Zahl. Ein Tab pro System, jeweils mit Erklärung, Beispielen und Übungsaufgaben.</p>
     <div class="tabs" role="tablist" aria-label="Zahlensystem wählen">
       <button class="tab" role="tab" id="tab-bin" aria-selected="true" aria-controls="panel-bin" data-tab="bin">Binär</button>
       <button class="tab" role="tab" id="tab-hex" aria-selected="false" aria-controls="panel-hex" data-tab="hex">Hex</button>
+      <button class="tab" role="tab" id="tab-okt" aria-selected="false" aria-controls="panel-okt" data-tab="okt">Oktal</button>
     </div>
   </div>
 </div>
-
 <div class="wrap">
-
   <div id="panel-bin" role="tabpanel" aria-labelledby="tab-bin">
-
     <section style="padding-top:36px">
       <p class="lede">Acht Schalter, zwei Zustände. Klick dich durch und beobachte, wie sich der Dezimalwert verändert - dann geht es unten weiter mit Erklärung und Übungsaufgaben.</p>
-
       <div class="demo-card">
         <p class="demo-label">Interaktiv: 1 Byte, Bit für Bit</p>
         <div class="bit-row" id="bit-switches">
@@ -416,14 +382,11 @@
       </div>
       <p class="demo-hint">Tipp: Schalte alles auf 0 und zähl einmal von 0 bis 15 hoch, nur mit den letzten vier Schaltern.</p>
     </section>
-
     <hr class="divider">
-
     <section>
       <h2>Was ist das Binärsystem?</h2>
       <p>Unser normales Zahlensystem hat die Basis 10 - zehn Ziffern, 0 bis 9. Jede Stelle einer Zahl ist das Zehnfache der Stelle rechts daneben: Einer, Zehner, Hunderter.</p>
       <p>Das Binärsystem hat die Basis 2. Es gibt nur zwei Ziffern, 0 und 1, und jede Stelle ist das <strong>Doppelte</strong> der Stelle rechts daneben - genau das, was die Schalter oben zeigen.</p>
-
       <div class="chip-row" aria-hidden="true">
         <div class="chip"><span class="val">128</span></div>
         <div class="chip"><span class="val">64</span></div>
@@ -436,9 +399,7 @@
       </div>
       <p class="demo-hint">Stellenwerte von rechts nach links: immer verdoppeln.</p>
     </section>
-
     <hr class="divider">
-
     <section>
       <h2>Dezimal → Binär umwandeln</h2>
       <p>Fortlaufend durch 2 teilen, die Reste von unten nach oben ablesen. Beispiel: 13.</p>
@@ -542,12 +503,10 @@
             <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer">16 + 8 + 4 + 2 + 1 = <span class="mono">31</span></div></details>
           </div>
         </div>
-
         <div class="level">
           <div class="level-badge">3</div>
           <h3>Addition ohne mehrfachen Übertrag</h3>
           <p class="level-desc">Die Grundregeln anwenden.</p>
-
           <div class="task">
             <div class="task-q"><p class="mono">0101 + 0010</p><span class="num">1 von 2</span></div>
             <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer"><span class="mono">0111</span> &nbsp;(5 + 2 = 7 ✓)</div></details>
@@ -557,12 +516,10 @@
             <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer"><span class="mono">1111</span> &nbsp;(9 + 6 = 15 ✓)</div></details>
           </div>
         </div>
-
         <div class="level">
           <div class="level-badge">4</div>
           <h3>Addition mit mehrfachem Übertrag</h3>
           <p class="level-desc">Hier kettet sich der Übertrag über mehrere Stellen.</p>
-
           <div class="task">
             <div class="task-q"><p class="mono">1011 + 1101</p><span class="num">1 von 2</span></div>
             <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer"><span class="mono">11000</span> &nbsp;(11 + 13 = 24, und 16 + 8 = 24 ✓)</div></details>
@@ -572,7 +529,6 @@
             <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer"><span class="mono">11110</span> &nbsp;(15 + 15 = 30, und 16 + 8 + 4 + 2 = 30 ✓)</div></details>
           </div>
         </div>
-
         <div class="level">
           <div class="level-badge">5</div>
           <h3>Bonus</h3>
@@ -586,14 +542,10 @@
             <div class="task-q"><p>Stimmt diese Behauptung? „1010 + 1010 = 10101" - nachrechnen und gegebenenfalls korrigieren.</p></div>
             <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer">Falsch. 1010 = 10, also 10 + 10 = 20. 20 in Binär ist <span class="mono">10100</span> (16 + 4), nicht 10101.</div></details>
           </div>
-
         </div>
-
       </div>
     </section>
-
   </div>
-
   <div id="panel-hex" role="tabpanel" aria-labelledby="tab-hex" hidden>
 
     <section style="padding-top:36px">
@@ -796,6 +748,215 @@
             <div class="task-q"><p>Stimmt diese Behauptung? „4C + 1F = 6C" - nachrechnen und gegebenenfalls korrigieren.</p></div>
             <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer">Falsch. 4C = 76, 1F = 31, 76 + 31 = 107. 107 in Hex ist <span class="mono">6B</span> (6 × 16 + 11), nicht 6C.</div></details>
           </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div id="panel-okt" role="tabpanel" aria-labelledby="tab-okt" hidden>
+    <section style="padding-top:36px">
+      <p class="lede">Neun Schalter, drei Gruppen: r, w, x. So entstehen Unix-Dateirechte wie <span class="mono">chmod 755</span></p>
+      <div class="demo-card">
+        <p class="demo-label">Interaktiv: Unix-Dateirechte</p>
+        <div class="perm-groups" id="perm-groups">
+          <div class="perm-group">
+            <div class="perm-group-label">Owner</div>
+            <div class="perm-row">
+              <button type="button" class="perm-switch is-on" data-val="4">r</button>
+              <button type="button" class="perm-switch is-on" data-val="2">w</button>
+              <button type="button" class="perm-switch is-on" data-val="1">x</button>
+            </div>
+            <div class="perm-digit">7</div>
+          </div>
+          <div class="perm-group">
+            <div class="perm-group-label">Gruppe</div>
+            <div class="perm-row">
+              <button type="button" class="perm-switch is-on" data-val="4">r</button>
+              <button type="button" class="perm-switch" data-val="2">w</button>
+              <button type="button" class="perm-switch is-on" data-val="1">x</button>
+            </div>
+            <div class="perm-digit">5</div>
+          </div>
+          <div class="perm-group">
+            <div class="perm-group-label">Andere</div>
+            <div class="perm-row">
+              <button type="button" class="perm-switch is-on" data-val="4">r</button>
+              <button type="button" class="perm-switch" data-val="2">w</button>
+              <button type="button" class="perm-switch is-on" data-val="1">x</button>
+            </div>
+            <div class="perm-digit">5</div>
+          </div>
+        </div>
+        <div class="demo-result">chmod <span id="perm-octal">755</span></div>
+      </div>
+      <p class="demo-hint">r = 4, w = 2, x = 1 - klick die Buchstaben, die Ziffer je Gruppe passt sich live an.</p>
+    </section>
+    <hr class="divider">
+    <section>
+      <h2>Was ist das Oktalsystem?</h2>
+      <p>Oktal hat die Basis 8. Es gibt nur die Ziffern 0 bis 7, keine Buchstaben. Jede Stelle ist das Achtfache der Stelle rechts daneben.</p>
+      <div class="chip-row narrow" aria-hidden="true">
+        <div class="chip"><span class="val">64</span></div>
+        <div class="chip"><span class="val">8</span></div>
+        <div class="chip"><span class="val">1</span></div>
+      </div>
+      <p style="margin-top:18px">Oktal begegnet einem vor allem bei Linux-Dateirechten: <span class="mono">chmod 755</span> heißt nichts anderes als „Owner darf alles, Gruppe und Andere dürfen lesen und ausführen" - wie oben im Demo. Jede Ziffer steht für eine Gruppe, jede Gruppe für die Summe aus r (4), w (2) und x (1).</p>
+    </section>
+
+    <hr class="divider">
+
+    <section>
+      <h2>Dezimal → Oktal umwandeln</h2>
+      <p>Fortlaufend durch 8 teilen, die Reste von unten nach oben ablesen. Beispiel: 100.</p>
+
+      <div class="calc-steps">
+        <div>100 ÷ 8 = 12 &nbsp;Rest <strong>4</strong></div>
+        <div>12 ÷ 8 = 1 &nbsp;Rest <strong>4</strong></div>
+        <div>1 ÷ 8 = 0 &nbsp;Rest <strong>1</strong></div>
+      </div>
+      <p class="sum-line">Von unten nach oben gelesen: <strong>144</strong></p>
+    </section>
+
+    <hr class="divider">
+
+    <section>
+      <h2>Oktal → Dezimal umwandeln</h2>
+      <p>Jede Ziffer mit ihrem Stellenwert multiplizieren und aufaddieren. Beispiel: 144.</p>
+
+      <div class="chip-row narrow" aria-hidden="true">
+        <div class="chip on"><span class="val">1</span><span class="place">64er: 64</span></div>
+        <div class="chip on"><span class="val">4</span><span class="place">8er: 32</span></div>
+        <div class="chip on"><span class="val">4</span><span class="place">1er: 4</span></div>
+      </div>
+      <p class="sum-line">64 + 32 + 4 = <strong>100</strong></p>
+    </section>
+
+    <hr class="divider">
+
+    <section>
+      <h2>Oktal ↔ Binär: der 3er-Gruppen-Trick</h2>
+      <p>Weil 1 Oktal-Ziffer genau 3 Bits entspricht, kann man eine Binärzahl von rechts in 3er-Gruppen aufteilen. Bei 8 Bits geht das nicht ganz glatt auf - man füllt links mit Nullen auf, bis die Länge durch 3 teilbar ist. Beispiel: derselbe Wert 42 wie im Binär-Tab.</p>
+
+      <div class="calc-steps">
+        <div>00101010 &nbsp;→&nbsp; mit Nullen aufgefüllt: <strong>000101010</strong></div>
+        <div>Gruppen: <strong>000</strong> &nbsp;<strong>101</strong> &nbsp;<strong>010</strong></div>
+        <div><strong>000</strong> = 0, &nbsp;<strong>101</strong> = 5, &nbsp;<strong>010</strong> = 2</div>
+      </div>
+      <p class="sum-line">Ergebnis: <strong>052</strong> &nbsp;(dieselbe 42 wie im Binär-Tab und als 2A im Hex-Tab)</p>
+
+      <h3>Nachschlagetabelle: Oktal-Ziffer und 3-Bit-Binär</h3>
+      <div class="chip-row" aria-hidden="true">
+        <div class="chip"><span class="val">0</span><span class="place">000</span></div>
+        <div class="chip"><span class="val">1</span><span class="place">001</span></div>
+        <div class="chip"><span class="val">2</span><span class="place">010</span></div>
+        <div class="chip"><span class="val">3</span><span class="place">011</span></div>
+        <div class="chip"><span class="val">4</span><span class="place">100</span></div>
+        <div class="chip"><span class="val">5</span><span class="place">101</span></div>
+        <div class="chip"><span class="val">6</span><span class="place">110</span></div>
+        <div class="chip"><span class="val">7</span><span class="place">111</span></div>
+      </div>
+    </section>
+    <hr class="divider">
+    <section>
+      <h2>Oktal-Addition</h2>
+      <p>Wie gewohnt Stelle für Stelle addieren. Sobald eine Stelle 8 oder mehr erreicht, 8 abziehen und 1 in die nächste Stelle übertragen.</p>
+      <h3>Beispiel mit Übertrag: 17 + 06</h3>
+      <div class="stack"><span class="carry">  1  </span>← Übertrag (7 + 6 = 13 = 8 + 5)
+   17
+<span class="rule">+ 06</span>
+<span class="result">  25</span></div>
+      <p class="sum-line">Kontrolle: 15 + 6 = 21, und 25 (oktal) = 2 × 8 + 5 = 21 ✓</p>
+    </section>
+
+    <hr class="divider">
+
+    <section>
+      <h2>Übungsaufgaben</h2>
+      <p class="lede">Gleicher Aufbau wie in den anderen Tabs, fünf Stufen von einfach bis kniffliger. Level 1 und 2 nutzen bewusst dieselben Zahlen wie im Hex-Tab - so seht ihr direkt, wie unterschiedlich dieselbe Zahl je nach System aussieht.</p>
+
+      <div class="levels">
+
+        <div class="level">
+          <div class="level-badge">1</div>
+          <h3>Dezimal → Oktal</h3>
+          <p class="level-desc">Einfacher Einstieg - kleine Zahlen umwandeln.</p>
+
+          <div class="task">
+            <div class="task-q"><p>10</p><span class="num">1 von 3</span></div>
+            <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer">10 = <span class="mono">12</span> (8 + 2)</div></details>
+          </div>
+          <div class="task">
+            <div class="task-q"><p>15</p><span class="num">2 von 3</span></div>
+            <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer">15 = <span class="mono">17</span> (8 + 7)</div></details>
+          </div>
+          <div class="task">
+            <div class="task-q"><p>31</p><span class="num">3 von 3</span></div>
+            <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer">31 = <span class="mono">37</span> (24 + 7)</div></details>
+          </div>
+        </div>
+
+        <div class="level">
+          <div class="level-badge">2</div>
+          <h3>Oktal → Dezimal</h3>
+          <p class="level-desc">Denselben Weg rückwärts gehen - die Umkehrung von Level 1.</p>
+
+          <div class="task">
+            <div class="task-q"><p class="mono">12</p><span class="num">1 von 3</span></div>
+            <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer">1 × 8 + 2 = <span class="mono">10</span></div></details>
+          </div>
+          <div class="task">
+            <div class="task-q"><p class="mono">17</p><span class="num">2 von 3</span></div>
+            <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer">1 × 8 + 7 = <span class="mono">15</span></div></details>
+          </div>
+          <div class="task">
+            <div class="task-q"><p class="mono">37</p><span class="num">3 von 3</span></div>
+            <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer">3 × 8 + 7 = <span class="mono">31</span></div></details>
+          </div>
+        </div>
+
+        <div class="level">
+          <div class="level-badge">3</div>
+          <h3>Addition ohne Übertrag</h3>
+          <p class="level-desc">Die Grundregeln anwenden.</p>
+
+          <div class="task">
+            <div class="task-q"><p class="mono">12 + 03</p><span class="num">1 von 2</span></div>
+            <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer"><span class="mono">15</span> &nbsp;(10 + 3 = 13 ✓)</div></details>
+          </div>
+          <div class="task">
+            <div class="task-q"><p class="mono">24 + 03</p><span class="num">2 von 2</span></div>
+            <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer"><span class="mono">27</span> &nbsp;(20 + 3 = 23 ✓)</div></details>
+          </div>
+        </div>
+
+        <div class="level">
+          <div class="level-badge">4</div>
+          <h3>Addition mit Übertrag</h3>
+          <p class="level-desc">Hier reicht die 8 in einer Stelle nicht mehr aus.</p>
+
+          <div class="task">
+            <div class="task-q"><p class="mono">37 + 04</p><span class="num">1 von 2</span></div>
+            <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer"><span class="mono">43</span> &nbsp;(31 + 4 = 35 ✓)</div></details>
+          </div>
+          <div class="task">
+            <div class="task-q"><p class="mono">77 + 77</p><span class="num">2 von 2</span></div>
+            <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer"><span class="mono">176</span> &nbsp;(63 + 63 = 126 ✓)</div></details>
+          </div>
+        </div>
+
+        <div class="level">
+          <div class="level-badge">5</div>
+          <h3>Bonus</h3>
+          <p class="level-desc">Etwas kniffliger - kombiniert Umwandlung, Addition und Kontrolle.</p>
+
+          <div class="task">
+            <div class="task-q"><p>Rechne 100 + 28 als Oktal: erst beide Zahlen umwandeln, dann oktal addieren, dann zur Kontrolle zurück in Dezimal umwandeln.</p></div>
+            <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer">100 = <span class="mono">144</span>, 28 = <span class="mono">34</span><br>144 + 034 = <span class="mono">200</span><br>Kontrolle: 100 + 28 = 128, und 200 (oktal) = 2 × 64 = 128 ✓</div></details>
+          </div>
+          <div class="task">
+            <div class="task-q"><p>Stimmt diese Behauptung? „44 + 15 = 62" (oktal) - nachrechnen und gegebenenfalls korrigieren.</p></div>
+            <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer">Falsch. 44 (oktal) = 36, 15 (oktal) = 13, 36 + 13 = 49. 49 in Oktal ist <span class="mono">61</span> (6 × 8 + 1), nicht 62.</div></details>
+          </div>
 
         </div>
 
@@ -813,7 +974,7 @@
 (function(){
   // Tabs
   var tabButtons = document.querySelectorAll('.tab');
-  var panels = { bin: document.getElementById('panel-bin'), hex: document.getElementById('panel-hex') };
+  var panels = { bin: document.getElementById('panel-bin'), hex: document.getElementById('panel-hex'), okt: document.getElementById('panel-okt') };
 
   tabButtons.forEach(function(btn){
     btn.addEventListener('click', function(){
@@ -879,6 +1040,41 @@
   });
 
   renderHex();
+
+  // Octal permission demo
+  var permGroups = Array.prototype.slice.call(document.querySelectorAll('#perm-groups .perm-group'));
+  var permOctalEl = document.getElementById('perm-octal');
+
+  function renderPerm(){
+    var result = '';
+    permGroups.forEach(function(g){
+      var gSwitches = Array.prototype.slice.call(g.querySelectorAll('.perm-switch'));
+      var val = 0;
+      gSwitches.forEach(function(sw){
+        var on = sw.getAttribute('aria-pressed') === 'true';
+        sw.classList.toggle('is-on', on);
+        if (on) val += parseInt(sw.getAttribute('data-val'), 10);
+      });
+      g.querySelector('.perm-digit').textContent = val;
+      result += val;
+    });
+    permOctalEl.textContent = result;
+  }
+
+  permGroups.forEach(function(g){
+    var gSwitches = Array.prototype.slice.call(g.querySelectorAll('.perm-switch'));
+    gSwitches.forEach(function(sw){
+      var initiallyOn = sw.classList.contains('is-on');
+      sw.setAttribute('aria-pressed', initiallyOn ? 'true' : 'false');
+      sw.addEventListener('click', function(){
+        var on = sw.getAttribute('aria-pressed') === 'true';
+        sw.setAttribute('aria-pressed', on ? 'false' : 'true');
+        renderPerm();
+      });
+    });
+  });
+
+  renderPerm();
 })();
 </script>
 
