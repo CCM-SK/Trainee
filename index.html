@@ -3,10 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Zahlensysteme & RAID - Lernheft</title>
+<title>Grundlagen Systemintegration - Lernheft</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
-
   :root{
     --bg: #16241C;
     --bg-raised: #1C2E22;
@@ -18,10 +17,8 @@
     --off: #263A2C;
     --off-text: #6C8074;
   }
-
   *{ box-sizing: border-box; }
   html{ scroll-behavior: smooth; }
-
   body{
     margin: 0;
     background: var(--bg);
@@ -31,76 +28,62 @@
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
   }
-
   .mono{ font-family: 'IBM Plex Mono', monospace; }
   a{ color: var(--amber); }
-
   button:focus-visible,
   summary:focus-visible,
   a:focus-visible{
     outline: 2px solid var(--amber);
     outline-offset: 3px;
   }
-
   .wrap{
     max-width: 640px;
     margin: 0 auto;
     padding: 0 24px 80px;
   }
-
   section{ padding-top: 52px; }
-
   h2{ font-size: 1.3rem; font-weight: 600; margin: 0 0 4px; }
   h3{ font-size: 1.05rem; font-weight: 600; margin: 28px 0 8px; }
   p{ margin: 0 0 14px; }
-
   .lede{ color: var(--ink-dim); max-width: 46ch; }
-
   .divider{
     border: none;
     height: 1px;
     background: var(--copper-line);
     margin: 52px 0 0;
   }
-
   .hero{
     background: var(--bg-raised);
     padding: 56px 24px 0;
     border-bottom: 1px solid var(--copper-line);
   }
-
   .hero-inner{ max-width: 640px; margin: 0 auto; }
-
   .hero h1{
-    font-size: 2rem;
+    font-size: 1.9rem;
     font-weight: 700;
     letter-spacing: -0.01em;
     margin: 0 0 10px;
   }
-
-  .hero p{ color: var(--ink-dim); max-width: 44ch; margin: 0 0 30px; }
-
+  .hero p{ color: var(--ink-dim); max-width: 46ch; margin: 0 0 30px; }
   .tabs{
     display: flex;
-    gap: 26px;
+    gap: 22px;
     margin: 0;
     flex-wrap: wrap;
   }
-
   .tab{
     background: none;
     border: none;
     color: var(--ink-dim);
     font-family: 'IBM Plex Sans', sans-serif;
-    font-size: 0.98rem;
+    font-size: 0.96rem;
     font-weight: 600;
     padding: 10px 2px 14px;
     cursor: pointer;
     position: relative;
+    white-space: nowrap;
   }
-
   .tab[aria-selected="true"]{ color: var(--ink); }
-
   .tab[aria-selected="true"]::after{
     content: "";
     position: absolute;
@@ -108,7 +91,6 @@
     height: 2px;
     background: var(--amber);
   }
-
   .demo-card{
     background: var(--bg-raised);
     border: 1px solid var(--copper-line);
@@ -116,19 +98,16 @@
     padding: 26px 24px 22px;
     margin: 28px 0 10px;
   }
-
   .demo-card .demo-label{
     font-size: 0.8rem;
     color: var(--off-text);
     margin: 0 0 18px;
   }
-
   .bit-row{
     display: grid;
     grid-template-columns: repeat(8, 1fr);
     gap: 6px;
   }
-
   .bit-switch{
     aspect-ratio: 1 / 1.15;
     background: var(--off);
@@ -141,23 +120,19 @@
     cursor: pointer;
     transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
   }
-
   .bit-switch.is-on{ background: var(--amber); border-color: var(--amber); color: #241804; }
-
   .bit-labels{ margin-top: 8px; }
   .bit-labels span{
     display: block; text-align: center;
     font-family: 'IBM Plex Mono', monospace;
     font-size: 0.72rem; color: var(--off-text);
   }
-
   .demo-result{
     margin-top: 20px;
     font-family: 'IBM Plex Mono', monospace;
     font-size: 1.6rem;
     color: var(--ink-dim);
   }
-
   .demo-result span{ color: var(--amber); font-weight: 600; }
   .demo-result-sub{
     margin-top: 4px;
@@ -165,15 +140,12 @@
     font-size: 0.9rem;
     color: var(--off-text);
   }
-
   .demo-hint{ margin-top: 16px; font-size: 0.85rem; color: var(--off-text); }
-
   .hex-row{
     display: grid;
     grid-template-columns: repeat(2, 72px);
     gap: 10px;
   }
-
   .hex-dial{
     aspect-ratio: 1 / 1;
     background: var(--off);
@@ -186,39 +158,31 @@
     cursor: pointer;
     transition: border-color 0.15s ease;
   }
-
   .hex-dial:hover{ border-color: var(--amber); }
-
   .hex-labels{
     display: grid;
     grid-template-columns: repeat(2, 72px);
     gap: 10px;
     margin-top: 8px;
   }
-
   .hex-labels span{
     display: block; text-align: center;
     font-family: 'IBM Plex Mono', monospace;
     font-size: 0.72rem; color: var(--off-text);
   }
-
   .perm-groups{
     display: flex;
     gap: 26px;
     flex-wrap: wrap;
   }
-
   .perm-group{ text-align: center; }
-
   .perm-group-label{
     font-family: 'IBM Plex Mono', monospace;
     font-size: 0.72rem;
     color: var(--off-text);
     margin-bottom: 8px;
   }
-
   .perm-row{ display: flex; gap: 4px; }
-
   .perm-switch{
     width: 36px; height: 36px;
     background: var(--off);
@@ -231,9 +195,7 @@
     cursor: pointer;
     transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
   }
-
   .perm-switch.is-on{ background: var(--amber); border-color: var(--amber); color: #241804; }
-
   .perm-digit{
     margin-top: 8px;
     font-family: 'IBM Plex Mono', monospace;
@@ -241,14 +203,14 @@
     font-weight: 600;
     color: var(--amber);
   }
-
+  .choice-row,
   .raid-level-row{
     display: flex;
     gap: 8px;
     flex-wrap: wrap;
     margin-bottom: 22px;
   }
-
+  .choice-btn,
   .raid-level-btn{
     padding: 8px 14px;
     background: var(--off);
@@ -261,16 +223,14 @@
     cursor: pointer;
     transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
   }
-
+  .choice-btn.is-on,
   .raid-level-btn.is-on{ background: var(--amber); border-color: var(--amber); color: #241804; }
-
   .raid-controls{
     display: flex;
     gap: 32px;
     flex-wrap: wrap;
     margin-bottom: 4px;
   }
-
   .raid-stepper-label{
     display: block;
     font-family: 'IBM Plex Mono', monospace;
@@ -278,9 +238,7 @@
     color: var(--off-text);
     margin-bottom: 8px;
   }
-
   .stepper-row{ display: flex; align-items: center; gap: 10px; }
-
   .stepper-btn{
     width: 30px; height: 30px;
     background: var(--off);
@@ -294,56 +252,78 @@
     line-height: 1;
     transition: border-color 0.15s ease;
   }
-
   .stepper-btn:hover{ border-color: var(--amber); }
-
   .stepper-value{
-    min-width: 56px;
+    min-width: 64px;
     text-align: center;
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     color: var(--ink);
     font-weight: 600;
   }
-
-  .raid-ref-grid{
+  .info-panel{
+    background: var(--bg-raised);
+    border-left: 2px solid var(--amber);
+    padding: 2px 16px;
+    margin-top: 20px;
+  }
+  .info-row{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--copper-line);
+  }
+  .info-row:last-child{ border-bottom: none; }
+  .info-label{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--off-text);
+    flex: none;
+  }
+  .info-value{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.9rem;
+    color: var(--ink);
+    text-align: right;
+  }
+  .ref-grid{
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 8px;
     margin: 18px 0 6px;
   }
-
-  .raid-ref-card{
+  .ref-grid.cols-3{ grid-template-columns: repeat(3, 1fr); }
+  .ref-grid.cols-4{ grid-template-columns: repeat(4, 1fr); }
+  .ref-grid.cols-7{ grid-template-columns: repeat(7, 1fr); }
+  .ref-card{
     text-align: center;
     padding: 12px 6px 10px;
     border: 1px solid var(--copper-line);
     border-radius: 3px;
     background: var(--off);
   }
-
-  .raid-ref-card .lvl{
+  .ref-card .name{
     display: block;
     font-family: 'IBM Plex Mono', monospace;
     font-weight: 600;
     color: var(--ink);
-    font-size: 0.92rem;
+    font-size: 0.9rem;
   }
-
-  .raid-ref-card .formula{
+  .ref-card .detail{
     display: block;
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.68rem;
+    font-size: 0.66rem;
     color: var(--amber);
     margin-top: 6px;
   }
-
-  .raid-ref-card .tol{
+  .ref-card .note{
     display: block;
-    font-size: 0.63rem;
+    font-size: 0.62rem;
     color: var(--off-text);
     margin-top: 4px;
   }
-
   .chip-row{
     display: grid;
     grid-template-columns: repeat(8, 1fr);
@@ -351,11 +331,9 @@
     max-width: 480px;
     margin: 18px 0 6px;
   }
-
   .chip-row.narrow{ grid-template-columns: repeat(4, 1fr); max-width: 260px; }
   .chip-row.six{ grid-template-columns: repeat(6, 1fr); max-width: 360px; }
   .chip-row + .chip-row{ margin-top: 6px; }
-
   .chip{
     text-align: center;
     padding: 10px 4px 8px;
@@ -363,18 +341,14 @@
     border-radius: 3px;
     background: var(--off);
   }
-
   .chip.on{ background: var(--amber); border-color: var(--amber); }
-
   .chip .val{
     display: block;
     font-family: 'IBM Plex Mono', monospace;
     font-weight: 600;
     color: var(--ink);
   }
-
   .chip.on .val{ color: #241804; }
-
   .chip .place{
     display: block;
     font-family: 'IBM Plex Mono', monospace;
@@ -382,22 +356,17 @@
     color: var(--off-text);
     margin-top: 4px;
   }
-
   .chip.on .place{ color: #4a3a10; }
-
   .sum-line{ font-family: 'IBM Plex Mono', monospace; color: var(--ink-dim); margin-top: 10px; }
   .sum-line strong{ color: var(--amber); }
-
   .calc-steps{ border-left: 2px solid var(--copper-line); padding-left: 18px; margin: 16px 0 20px; }
-
   .calc-steps div{
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.95rem;
+    font-size: 0.92rem;
     color: var(--ink-dim);
     padding: 5px 0;
     position: relative;
   }
-
   .calc-steps div::before{
     content: "";
     position: absolute;
@@ -406,9 +375,7 @@
     border-radius: 50%;
     background: var(--copper);
   }
-
   .calc-steps div strong{ color: var(--ink); font-weight: 600; }
-
   .stack{
     background: var(--bg-raised);
     border: 1px solid var(--copper-line);
@@ -421,22 +388,17 @@
     white-space: pre;
     overflow-x: auto;
   }
-
   .stack .carry{ color: var(--copper); }
   .stack .result{ color: var(--amber); font-weight: 600; }
   .stack .rule{ border-top: 1px solid var(--copper-line); }
-
   .rules{
     list-style: none; padding: 0; margin: 14px 0 22px;
     font-family: 'IBM Plex Mono', monospace;
     font-size: 0.95rem; color: var(--ink-dim);
   }
-
   .rules li{ padding: 4px 0; }
   .rules li strong{ color: var(--ink); }
-
   .levels{ position: relative; padding-left: 34px; margin-top: 24px; }
-
   .levels::before{
     content: "";
     position: absolute;
@@ -444,9 +406,7 @@
     width: 1px;
     background: var(--copper-line);
   }
-
   .level{ position: relative; margin-bottom: 44px; }
-
   .level-badge{
     position: absolute; left: -34px; top: 0;
     width: 26px; height: 26px;
@@ -458,56 +418,44 @@
     font-size: 0.85rem; font-weight: 600;
     display: flex; align-items: center; justify-content: center;
   }
-
   .level h3{ margin: 0 0 4px; }
   .level .level-desc{ color: var(--ink-dim); font-size: 0.92rem; margin-bottom: 16px; }
-
   .task{ margin-bottom: 12px; border-bottom: 1px solid var(--copper-line); padding-bottom: 12px; }
   .task:last-child{ border-bottom: none; }
-
   .task-q{ display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
   .task-q p{ margin: 0; }
   .task-q .num{ font-family: 'IBM Plex Mono', monospace; font-size: 0.95rem; color: var(--ink-dim); }
-
   details{ margin-top: 8px; }
-
   summary{
     cursor: pointer; list-style: none;
     display: inline-flex; align-items: center; gap: 8px;
     font-size: 0.88rem; color: var(--ink-dim);
     user-select: none;
   }
-
   summary::-webkit-details-marker{ display: none; }
-
   summary .switch-dot{
     width: 9px; height: 9px; border-radius: 50%;
     background: var(--off-text);
     transition: background 0.15s ease;
     flex: none;
   }
-
   details[open] summary .switch-dot{ background: var(--amber); }
   details[open] summary{ color: var(--ink); }
-
   .answer{
     margin-top: 10px; padding: 12px 16px;
     background: var(--bg-raised);
     border-left: 2px solid var(--amber);
     font-size: 0.95rem; color: var(--ink-dim);
   }
-
   .answer .mono{ color: var(--ink); }
-
   footer{
     margin-top: 60px; padding-top: 20px;
     border-top: 1px solid var(--copper-line);
     color: var(--off-text); font-size: 0.88rem;
   }
-
   @media (max-width: 480px){
     .hero{ padding: 40px 20px 0; }
-    .hero h1{ font-size: 1.6rem; }
+    .hero h1{ font-size: 1.5rem; }
     .bit-switch{ font-size: 0.9rem; }
     .bit-labels span{ font-size: 0.6rem; }
     .demo-result{ font-size: 1.3rem; }
@@ -515,10 +463,11 @@
     .hex-row, .hex-labels{ grid-template-columns: repeat(2, 64px); }
     .perm-groups{ gap: 16px; }
     .perm-switch{ width: 32px; height: 32px; font-size: 0.82rem; }
-    .raid-ref-grid{ grid-template-columns: repeat(2, 1fr); }
+    .ref-grid{ grid-template-columns: repeat(2, 1fr); }
     .raid-controls{ gap: 20px; }
+    .info-row{ flex-direction: column; align-items: flex-start; gap: 2px; }
+    .info-value{ text-align: left; }
   }
-
   @media (prefers-reduced-motion: reduce){
     *{ transition: none !important; scroll-behavior: auto !important; }
   }
@@ -528,21 +477,25 @@
 
 <div class="hero">
   <div class="hero-inner">
-    <h1>Zahlensysteme & RAID</h1>
-    <p>Binär, Hexadezimal und Oktal sind drei Schreibweisen für dieselbe Zahl. RAID zeigt, wie mehrere Festplatten zu einem Laufwerk werden. Ein Tab pro Thema, jeweils mit Erklärung, Beispielen und Übungsaufgaben.</p>
+    <h1>Grundlagen Systemintegration</h1>
+    <p>Zahlensysteme, Speicher und Netzwerke – ein Tab pro Thema, jeweils mit Erklärung, Beispielen und Übungsaufgaben.</p>
     <div class="tabs" role="tablist" aria-label="Thema wählen">
       <button class="tab" role="tab" id="tab-bin" aria-selected="true" aria-controls="panel-bin" data-tab="bin">Binär</button>
       <button class="tab" role="tab" id="tab-hex" aria-selected="false" aria-controls="panel-hex" data-tab="hex">Hex</button>
       <button class="tab" role="tab" id="tab-okt" aria-selected="false" aria-controls="panel-okt" data-tab="okt">Oktal</button>
       <button class="tab" role="tab" id="tab-raid" aria-selected="false" aria-controls="panel-raid" data-tab="raid">RAID</button>
+      <button class="tab" role="tab" id="tab-netz" aria-selected="false" aria-controls="panel-netz" data-tab="netz">Netzwerke</button>
+      <button class="tab" role="tab" id="tab-tcpip" aria-selected="false" aria-controls="panel-tcpip" data-tab="tcpip">TCP/IP</button>
     </div>
   </div>
 </div>
-
 <div class="wrap">
+
   <div id="panel-bin" role="tabpanel" aria-labelledby="tab-bin">
+
     <section style="padding-top:36px">
       <p class="lede">Acht Schalter, zwei Zustände. Klick dich durch und beobachte, wie sich der Dezimalwert verändert – dann geht es unten weiter mit Erklärung und Übungsaufgaben.</p>
+
       <div class="demo-card">
         <p class="demo-label">Interaktiv: 1 Byte, Bit für Bit</p>
         <div class="bit-row" id="bit-switches">
@@ -562,11 +515,14 @@
       </div>
       <p class="demo-hint">Tipp: Schalte alles auf 0 und zähl einmal von 0 bis 15 hoch, nur mit den letzten vier Schaltern.</p>
     </section>
+
     <hr class="divider">
+
     <section>
       <h2>Was ist das Binärsystem?</h2>
       <p>Unser normales Zahlensystem hat die Basis 10 – zehn Ziffern, 0 bis 9. Jede Stelle einer Zahl ist das Zehnfache der Stelle rechts daneben: Einer, Zehner, Hunderter.</p>
       <p>Das Binärsystem hat die Basis 2. Es gibt nur zwei Ziffern, 0 und 1, und jede Stelle ist das <strong>Doppelte</strong> der Stelle rechts daneben – genau das, was die Schalter oben zeigen.</p>
+
       <div class="chip-row" aria-hidden="true">
         <div class="chip"><span class="val">128</span></div>
         <div class="chip"><span class="val">64</span></div>
@@ -639,13 +595,10 @@
 <span class="result">  1000</span></div>
       <p class="sum-line">Kontrolle: 7 + 1 = 8, und 1000 = 8 ✓</p>
     </section>
-
     <hr class="divider">
-
     <section>
       <h2>Übungsaufgaben</h2>
       <p class="lede">Fünf Stufen, von einfach bis kniffliger. Lösung erst nachsehen, wenn man selbst fertig gerechnet hat.</p>
-
       <div class="levels">
 
         <div class="level">
@@ -666,7 +619,6 @@
             <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer">12 = <span class="mono">1100</span> (8 + 4 + 0 + 0)</div></details>
           </div>
         </div>
-
         <div class="level">
           <div class="level-badge">2</div>
           <h3>Binär → Dezimal</h3>
@@ -700,7 +652,6 @@
             <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer"><span class="mono">1111</span> &nbsp;(9 + 6 = 15 ✓)</div></details>
           </div>
         </div>
-
         <div class="level">
           <div class="level-badge">4</div>
           <h3>Addition mit mehrfachem Übertrag</h3>
@@ -715,7 +666,6 @@
             <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer"><span class="mono">11110</span> &nbsp;(15 + 15 = 30, und 16 + 8 + 4 + 2 = 30 ✓)</div></details>
           </div>
         </div>
-
         <div class="level">
           <div class="level-badge">5</div>
           <h3>Bonus</h3>
@@ -730,10 +680,11 @@
             <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer">Falsch. 1010 = 10, also 10 + 10 = 20. 20 in Binär ist <span class="mono">10100</span> (16 + 4), nicht 10101.</div></details>
           </div>
         </div>
-
       </div>
     </section>
   </div>
+
+
 
   <div id="panel-hex" role="tabpanel" aria-labelledby="tab-hex" hidden>
 
@@ -908,10 +859,12 @@
             <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer"><span class="mono">2E</span> &nbsp;(42 + 4 = 46 ✓)</div></details>
           </div>
         </div>
+
         <div class="level">
           <div class="level-badge">4</div>
           <h3>Addition mit Übertrag</h3>
           <p class="level-desc">Hier reicht die 16 in einer Stelle nicht mehr aus.</p>
+
           <div class="task">
             <div class="task-q"><p class="mono">7F + 01</p><span class="num">1 von 2</span></div>
             <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer"><span class="mono">80</span> &nbsp;(127 + 1 = 128 ✓)</div></details>
@@ -921,10 +874,12 @@
             <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer"><span class="mono">1FE</span> &nbsp;(255 + 255 = 510 ✓)</div></details>
           </div>
         </div>
+
         <div class="level">
           <div class="level-badge">5</div>
           <h3>Bonus</h3>
           <p class="level-desc">Etwas kniffliger – kombiniert Umwandlung, Addition und Kontrolle.</p>
+
           <div class="task">
             <div class="task-q"><p>Rechne 200 + 55 als Hex: erst beide Zahlen umwandeln, dann hex addieren, dann zur Kontrolle zurück in Dezimal umwandeln.</p></div>
             <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer">200 = <span class="mono">C8</span>, 55 = <span class="mono">37</span><br>C8 + 37 = <span class="mono">FF</span><br>Kontrolle: 200 + 55 = 255, und FF = 15 × 16 + 15 = 255 ✓</div></details>
@@ -933,15 +888,16 @@
             <div class="task-q"><p>Stimmt diese Behauptung? „4C + 1F = 6C" – nachrechnen und gegebenenfalls korrigieren.</p></div>
             <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer">Falsch. 4C = 76, 1F = 31, 76 + 31 = 107. 107 in Hex ist <span class="mono">6B</span> (6 × 16 + 11), nicht 6C.</div></details>
           </div>
+
         </div>
       </div>
     </section>
-  </div>
 
+  </div>
   <div id="panel-okt" role="tabpanel" aria-labelledby="tab-okt" hidden>
 
     <section style="padding-top:36px">
-      <p class="lede">Neun Schalter, drei Gruppen: r, w, x. So entstehen Unix-Dateirechte wie <span class="mono">chmod 755</span></p>
+      <p class="lede">Neun Schalter, drei Gruppen: r, w, x. So entstehen Unix-Dateirechte wie <span class="mono">chmod 755</span> – ein waschechter Praxisfall für Oktalzahlen.</p>
 
       <div class="demo-card">
         <p class="demo-label">Interaktiv: Unix-Dateirechte</p>
@@ -991,7 +947,7 @@
         <div class="chip"><span class="val">1</span></div>
       </div>
 
-      <p style="margin-top:18px">Oktal begegnet einem vor allem bei Linux-Dateirechten: <span class="mono">chmod 755</span> heißt nichts anderes als „Owner darf alles, Gruppe und Andere dürfen lesen und ausführen" – wie oben im Demo. Jede Ziffer steht für eine Gruppe, jede Gruppe für die Summe aus r (4), w (2) und x (1).</p>
+      <p style="margin-top:18px">Oktal begegnet euch in der Systemintegration vor allem bei Linux-Dateirechten: <span class="mono">chmod 755</span> heißt nichts anderes als „Owner darf alles, Gruppe und Andere dürfen lesen und ausführen" – wie oben im Demo. Jede Ziffer steht für eine Gruppe, jede Gruppe für die Summe aus r (4), w (2) und x (1).</p>
     </section>
 
     <hr class="divider">
@@ -1154,9 +1110,11 @@
         </div>
       </div>
     </section>
+
   </div>
 
   <div id="panel-raid" role="tabpanel" aria-labelledby="tab-raid" hidden>
+
     <section style="padding-top:36px">
       <p class="lede">Fünf Level, ein Rechner: wähle ein RAID-Level, stell Plattenzahl und Plattengröße ein und beobachte, wie sich nutzbarer Speicher und Ausfalltoleranz verändern.</p>
 
@@ -1192,19 +1150,16 @@
       </div>
       <p class="demo-hint">Tipp: Wechsel zwischen den Levels bei gleicher Plattenzahl und -größe – so siehst du direkt den Unterschied in nutzbarem Speicher und Sicherheit.</p>
     </section>
-
     <hr class="divider">
-
     <section>
       <h2>Was ist RAID?</h2>
       <p>RAID (Redundant Array of Independent Disks) fasst mehrere physische Festplatten zu einem logischen Laufwerk zusammen – für mehr Geschwindigkeit, mehr Ausfallsicherheit, oder beides gleichzeitig. Welches Level du wählst, entscheidet über die Formel für den nutzbaren Speicher und darüber, wie viele Platten ausfallen dürfen, ohne dass Daten verloren gehen.</p>
-
-      <div class="raid-ref-grid" aria-hidden="true">
-        <div class="raid-ref-card"><span class="lvl">RAID 0</span><span class="formula">n × Größe</span><span class="tol">0 Platten</span></div>
-        <div class="raid-ref-card"><span class="lvl">RAID 1</span><span class="formula">1 × Größe</span><span class="tol">n−1 Platten</span></div>
-        <div class="raid-ref-card"><span class="lvl">RAID 5</span><span class="formula">(n−1) × Größe</span><span class="tol">1 Platte</span></div>
-        <div class="raid-ref-card"><span class="lvl">RAID 6</span><span class="formula">(n−2) × Größe</span><span class="tol">2 Platten</span></div>
-        <div class="raid-ref-card"><span class="lvl">RAID 10</span><span class="formula">(n/2) × Größe</span><span class="tol">1 je Paar</span></div>
+      <div class="ref-grid" aria-hidden="true">
+        <div class="ref-card"><span class="name">RAID 0</span><span class="detail">n × Größe</span><span class="note">0 Platten</span></div>
+        <div class="ref-card"><span class="name">RAID 1</span><span class="detail">1 × Größe</span><span class="note">n−1 Platten</span></div>
+        <div class="ref-card"><span class="name">RAID 5</span><span class="detail">(n−1) × Größe</span><span class="note">1 Platte</span></div>
+        <div class="ref-card"><span class="name">RAID 6</span><span class="detail">(n−2) × Größe</span><span class="note">2 Platten</span></div>
+        <div class="ref-card"><span class="name">RAID 10</span><span class="detail">(n/2) × Größe</span><span class="note">1 je Paar</span></div>
       </div>
       <p class="demo-hint">n = Anzahl der Platten. Mindestanzahl: RAID 0 und 1 ab 2, RAID 5 ab 3, RAID 6 und RAID 10 ab 4 (RAID 10 zusätzlich immer geradzahlig).</p>
     </section>
@@ -1295,7 +1250,6 @@
             <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer">(5 − 1) × 4 TB = <span class="mono">16 TB</span></div></details>
           </div>
         </div>
-
         <div class="level">
           <div class="level-badge">3</div>
           <h3>RAID 6 und RAID 10 berechnen</h3>
@@ -1310,7 +1264,6 @@
             <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer">(6 ÷ 2) × 2 TB = <span class="mono">6 TB</span></div></details>
           </div>
         </div>
-
         <div class="level">
           <div class="level-badge">4</div>
           <h3>Verständnis & Planung</h3>
@@ -1339,6 +1292,392 @@
             <div class="task-q"><p>Stimmt diese Behauptung? „RAID 6 mit 5 Platten à 3 TB ergibt 12 TB nutzbaren Speicher." – nachrechnen und gegebenenfalls korrigieren.</p></div>
             <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer">Falsch. (5 − 2) × 3 TB = <span class="mono">9 TB</span>, nicht 12 TB.</div></details>
           </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div id="panel-netz" role="tabpanel" aria-labelledby="tab-netz" hidden>
+
+    <section style="padding-top:36px">
+      <p class="lede">Vier Geräte, ein Klick: welches Gerät arbeitet auf welcher OSI-Schicht – und was bedeutet das für Kollisions- und Broadcastdomänen?</p>
+
+      <div class="demo-card">
+        <p class="demo-label">Interaktiv: Welches Gerät macht was?</p>
+        <div class="choice-row" id="device-choice">
+          <button type="button" class="choice-btn" data-device="hub">Hub</button>
+          <button type="button" class="choice-btn is-on" data-device="switch">Switch</button>
+          <button type="button" class="choice-btn" data-device="router">Router</button>
+          <button type="button" class="choice-btn" data-device="ap">Access Point</button>
+        </div>
+        <div class="info-panel">
+          <div class="info-row"><span class="info-label">OSI-Schicht</span><span class="info-value" id="device-layer">2 – Sicherung</span></div>
+          <div class="info-row"><span class="info-label">Funktion</span><span class="info-value" id="device-function">Leitet Frames anhand der MAC-Adresstabelle gezielt an den richtigen Port weiter</span></div>
+          <div class="info-row"><span class="info-label">Kollisionsdomäne</span><span class="info-value" id="device-collision">1 pro Port</span></div>
+          <div class="info-row"><span class="info-label">Broadcastdomäne</span><span class="info-value" id="device-broadcast">1 gemeinsame (ohne VLANs)</span></div>
+        </div>
+      </div>
+      <p class="demo-hint">Kollisionsdomäne = wie viele Geräte sich das Medium teilen und Kollisionen verursachen können. Broadcastdomäne = wie weit sich ein Broadcast ausbreitet.</p>
+    </section>
+
+    <hr class="divider">
+
+    <section>
+      <h2>Warum Schichtmodelle?</h2>
+      <p>Netzwerkkommunikation ist komplex – Schichtmodelle zerlegen sie in überschaubare Teilaufgaben. Jede Schicht löst genau ein Problem und reicht das Ergebnis an die nächste weiter. Vorteil: Hersteller können Geräte oder Software für eine einzelne Schicht bauen, ohne den Rest zu kennen. Und bei der Fehlersuche lässt sich das Problem schichtweise eingrenzen, statt wild zu raten.</p>
+    </section>
+
+    <hr class="divider">
+
+    <section>
+      <h2>OSI-Modell vs. TCP/IP-Modell</h2>
+      <p>Das OSI-Modell hat 7 Schichten, das (in der Praxis genutzte) TCP/IP-Modell fasst mehrere davon zusammen:</p>
+
+      <div class="calc-steps">
+        <div><strong>7 Anwendung</strong> – HTTP, DNS, SMTP … <span class="mono">→ TCP/IP: Anwendung</span></div>
+        <div><strong>6 Darstellung</strong> – Datenformat, Verschlüsselung <span class="mono">→ TCP/IP: Anwendung</span></div>
+        <div><strong>5 Sitzung</strong> – Sitzungsauf-/abbau <span class="mono">→ TCP/IP: Anwendung</span></div>
+        <div><strong>4 Transport</strong> – TCP, UDP, Ports <span class="mono">→ TCP/IP: Transport</span></div>
+        <div><strong>3 Vermittlung</strong> – IP, Routing <span class="mono">→ TCP/IP: Internet</span></div>
+        <div><strong>2 Sicherung</strong> – MAC, Switch, Ethernet-Frame <span class="mono">→ TCP/IP: Netzzugang</span></div>
+        <div><strong>1 Bitübertragung</strong> – Kabel, Hub, Spannungspegel <span class="mono">→ TCP/IP: Netzzugang</span></div>
+      </div>
+      <p class="demo-hint">Von oben (7) nach unten (1) gelesen, wie ein echter Protokoll-Stack.</p>
+    </section>
+
+    <hr class="divider">
+
+    <section>
+      <h2>Netzwerktopologien</h2>
+      <p>Wie Geräte physisch oder logisch miteinander verbunden sind:</p>
+
+      <div class="ref-grid cols-4" aria-hidden="true">
+        <div class="ref-card"><span class="name">Stern</span><span class="detail">zentraler Switch</span><span class="note">Ausfall betrifft nur 1 Gerät</span></div>
+        <div class="ref-card"><span class="name">Bus</span><span class="detail">1 gemeinsames Kabel</span><span class="note">Kabelbruch = ganzes Netz down</span></div>
+        <div class="ref-card"><span class="name">Ring</span><span class="detail">geschlossener Ring</span><span class="note">Daten laufen in eine Richtung</span></div>
+        <div class="ref-card"><span class="name">Mesh</span><span class="detail">viele Querverbindungen</span><span class="note">ausfallsicher, aufwendig</span></div>
+      </div>
+      <p class="demo-hint">Moderne Firmennetze nutzen praktisch immer die Stern-Topologie mit Switches in der Mitte.</p>
+    </section>
+
+    <hr class="divider">
+
+    <section>
+      <h2>Übertragungsmedien</h2>
+      <p>Womit die Bits physisch transportiert werden:</p>
+
+      <div class="ref-grid cols-3" aria-hidden="true">
+        <div class="ref-card"><span class="name">Kupfer</span><span class="detail">Twisted Pair, Cat5e/6</span><span class="note">günstig, bis ca. 100 m</span></div>
+        <div class="ref-card"><span class="name">Glasfaser</span><span class="detail">Lichtwellenleiter</span><span class="note">hohe Reichweite & Bandbreite</span></div>
+        <div class="ref-card"><span class="name">WLAN</span><span class="detail">Funk</span><span class="note">flexibel, geteiltes Medium</span></div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <section>
+      <h2>Übungsaufgaben</h2>
+      <p class="lede">Gleicher Aufbau wie in den anderen Tabs, fünf Stufen von einfach bis kniffliger – hier geht es statt ums Rechnen ums Einordnen.</p>
+
+      <div class="levels">
+
+        <div class="level">
+          <div class="level-badge">1</div>
+          <h3>Begriffe zuordnen</h3>
+          <p class="level-desc">Einfacher Einstieg – Grundwissen abrufen.</p>
+
+          <div class="task">
+            <div class="task-q"><p>Auf welcher OSI-Schicht arbeitet ein Switch?</p><span class="num">1 von 3</span></div>
+            <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer">Schicht <span class="mono">2</span> (Sicherung / Data Link).</div></details>
+          </div>
+          <div class="task">
+            <div class="task-q"><p>Welches Gerät trennt Broadcastdomänen?</p><span class="num">2 von 3</span></div>
+            <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer">Der <span class="mono">Router</span>.</div></details>
+          </div>
+          <div class="task">
+            <div class="task-q"><p>Wie viele Schichten hat das OSI-Modell?</p><span class="num">3 von 3</span></div>
+            <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer"><span class="mono">7</span> Schichten.</div></details>
+          </div>
+        </div>
+
+        <div class="level">
+          <div class="level-badge">2</div>
+          <h3>Geräte-Eigenschaften</h3>
+          <p class="level-desc">Etwas genauer hinschauen.</p>
+
+          <div class="task">
+            <div class="task-q"><p>Wie viele Kollisionsdomänen erzeugt ein 8-Port-Switch (ohne weitere Geräte dahinter)?</p></div>
+            <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer"><span class="mono">8</span> – eine pro Port.</div></details>
+          </div>
+          <div class="task">
+            <div class="task-q"><p>Warum verursacht ein Hub mehr Kollisionen als ein Switch?</p></div>
+            <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer">Weil sich beim Hub alle Ports eine einzige Kollisionsdomäne teilen, während der Switch jedem Port eine eigene gibt.</div></details>
+          </div>
+        </div>
+
+        <div class="level">
+          <div class="level-badge">3</div>
+          <h3>Topologien einordnen</h3>
+          <p class="level-desc">Vor- und Nachteile kennen.</p>
+
+          <div class="task">
+            <div class="task-q"><p>Welche Topologie nutzen praktisch alle modernen Firmennetze?</p></div>
+            <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer">Die <span class="mono">Stern-Topologie</span>, mit Switches im Zentrum.</div></details>
+          </div>
+          <div class="task">
+            <div class="task-q"><p>Was ist der größte Nachteil der Bus-Topologie?</p></div>
+            <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer">Ein Kabelbruch kann das gesamte Segment lahmlegen, da sich alle Geräte dasselbe Kabel teilen.</div></details>
+          </div>
+        </div>
+
+        <div class="level">
+          <div class="level-badge">4</div>
+          <h3>Schichtmodell anwenden</h3>
+          <p class="level-desc">Etwas kniffliger – auf ein Szenario übertragen.</p>
+
+          <div class="task">
+            <div class="task-q"><p>Ein Kunde hat kein Internet, das Link-Licht am Switch-Port leuchtet aber. Auf welcher Schicht würdest du als Nächstes suchen, und warum?</p></div>
+            <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer">Da Schicht 1 (physische Verbindung) funktioniert, prüft man als Nächstes Schicht 2/3 – z. B. VLAN-Konfiguration, IP-Adresse, Routing – statt das Kabel zu tauschen.</div></details>
+          </div>
+          <div class="task">
+            <div class="task-q"><p>Ordne zu: HTTP, IP, MAC-Adresse, TCP – zu welcher OSI-Schicht gehört jeder Begriff (grob)?</p></div>
+            <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer">HTTP: Schicht 7 (Anwendung) · IP: Schicht 3 (Vermittlung) · MAC-Adresse: Schicht 2 (Sicherung) · TCP: Schicht 4 (Transport).</div></details>
+          </div>
+        </div>
+
+        <div class="level">
+          <div class="level-badge">5</div>
+          <h3>Bonus</h3>
+          <p class="level-desc">Etwas kniffliger – Verständnis statt Auswendiglernen.</p>
+
+          <div class="task">
+            <div class="task-q"><p>Warum bringt „Bottom-Up-Troubleshooting" (von Schicht 1 aufwärts) bei der Fehlersuche Vorteile?</p></div>
+            <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer">Höhere Schichten hängen von den unteren ab: Ohne funktionierende physische Verbindung (Schicht 1) bringt es nichts, ein DNS- oder Anwendungsproblem (Schicht 7) zu untersuchen. Man arbeitet sich systematisch von der einfachsten Ursache nach oben vor.</div></details>
+          </div>
+          <div class="task">
+            <div class="task-q"><p>Stimmt diese Behauptung? „Ein Access Point trennt genau wie ein Router die Broadcastdomäne zwischen WLAN und LAN." – prüfen und gegebenenfalls korrigieren.</p></div>
+            <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer">Falsch. Ein Access Point arbeitet auf Schicht 1/2 und verbindet WLAN-Clients transparent mit dem angeschlossenen LAN – er ist Teil derselben Broadcastdomäne, nicht ihr Trenner. Das übernimmt erst ein Router (oder VLANs).</div></details>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </div>
+
+  <div id="panel-tcpip" role="tabpanel" aria-labelledby="tab-tcpip" hidden>
+
+    <section style="padding-top:36px">
+      <p class="lede">Ein Netz, zwei Regler: Host-Oktett und Präfix einstellen und live sehen, wie sich Netzadresse, Broadcastadresse und nutzbare Hosts verändern.</p>
+
+      <div class="demo-card">
+        <p class="demo-label">Interaktiv: Subnetz-Rechner (192.168.1.0er-Netz)</p>
+        <div class="raid-controls">
+          <div class="raid-stepper">
+            <span class="raid-stepper-label">Host (letztes Oktett)</span>
+            <div class="stepper-row">
+              <button type="button" class="stepper-btn" id="octet-minus">−</button>
+              <span class="stepper-value" id="subnet-octet-display">130</span>
+              <button type="button" class="stepper-btn" id="octet-plus">+</button>
+            </div>
+          </div>
+          <div class="raid-stepper">
+            <span class="raid-stepper-label">Präfix (CIDR)</span>
+            <div class="stepper-row">
+              <button type="button" class="stepper-btn" id="prefix-minus">−</button>
+              <span class="stepper-value" id="subnet-prefix-display">/26</span>
+              <button type="button" class="stepper-btn" id="prefix-plus">+</button>
+            </div>
+          </div>
+        </div>
+        <div class="info-panel">
+          <div class="info-row"><span class="info-label">IP-Adresse</span><span class="info-value" id="subnet-ip">192.168.1.130</span></div>
+          <div class="info-row"><span class="info-label">Subnetzmaske</span><span class="info-value" id="subnet-mask">255.255.255.192</span></div>
+          <div class="info-row"><span class="info-label">Netzadresse</span><span class="info-value" id="subnet-network">192.168.1.128</span></div>
+          <div class="info-row"><span class="info-label">Broadcastadresse</span><span class="info-value" id="subnet-broadcast">192.168.1.191</span></div>
+          <div class="info-row"><span class="info-label">Nutzbare Hosts</span><span class="info-value" id="subnet-hosts">62 (129–190)</span></div>
+        </div>
+      </div>
+      <p class="demo-hint">Tipp: Zähl das Präfix hoch und beobachte, wie die Maske wächst und die Anzahl nutzbarer Hosts schrumpft.</p>
+    </section>
+
+    <hr class="divider">
+
+    <section>
+      <h2>IP-Adresse und Subnetzmaske</h2>
+      <p>Eine IPv4-Adresse ist 32 Bit lang, geschrieben als 4 Oktette à 8 Bit (dezimal, mit Punkten getrennt). Die Subnetzmaske trennt Netz- und Hostanteil: 1-Bits gehören zum Netz, 0-Bits zum Host. Die CIDR-Schreibweise <span class="mono">/26</span> gibt einfach an, wie viele 1-Bits von links gezählt werden.</p>
+
+      <p>Erinnerst du dich an das Byte aus dem Binär-Tab? Eine Subnetzmaske ist nichts anderes als ein Oktett, bei dem von links beginnend Bits auf 1 gesetzt werden. Für /26 sind das die ersten 2 Bits:</p>
+
+      <div class="chip-row" aria-hidden="true">
+        <div class="chip on"><span class="val">1</span><span class="place">128</span></div>
+        <div class="chip on"><span class="val">1</span><span class="place">64</span></div>
+        <div class="chip"><span class="val">0</span><span class="place">32</span></div>
+        <div class="chip"><span class="val">0</span><span class="place">16</span></div>
+        <div class="chip"><span class="val">0</span><span class="place">8</span></div>
+        <div class="chip"><span class="val">0</span><span class="place">4</span></div>
+        <div class="chip"><span class="val">0</span><span class="place">2</span></div>
+        <div class="chip"><span class="val">0</span><span class="place">1</span></div>
+      </div>
+      <p class="sum-line">128 + 64 = <strong>192</strong> → Maske-Oktett für /26: <strong>255.255.255.192</strong></p>
+    </section>
+
+    <hr class="divider">
+
+    <section>
+      <h2>Netz- und Broadcastadresse berechnen</h2>
+      <p>Beispiel: 192.168.1.77 /28 (Blockgröße 16, da 2⁴).</p>
+
+      <div class="calc-steps">
+        <div>77 ÷ 16 = 4 Rest 13 &nbsp;→ Subnetz beginnt bei <strong>4 × 16 = 64</strong></div>
+        <div>Netzadresse: <strong>192.168.1.64</strong></div>
+        <div>Broadcastadresse: 64 + 16 − 1 = <strong>192.168.1.79</strong></div>
+      </div>
+      <p class="sum-line">Nutzbare Hosts: 79 − 64 − 1 = <strong>14</strong> (192.168.1.65 bis .78)</p>
+    </section>
+
+    <hr class="divider">
+
+    <section>
+      <h2>Nutzbare Hosts berechnen</h2>
+      <p>Formel: 2<sup>(32 − Präfix)</sup> − 2 (minus Netz- und Broadcastadresse, die nicht vergeben werden können).</p>
+
+      <div class="ref-grid cols-7" aria-hidden="true">
+        <div class="ref-card"><span class="name">/24</span><span class="detail">256</span><span class="note">254 Hosts</span></div>
+        <div class="ref-card"><span class="name">/25</span><span class="detail">128</span><span class="note">126 Hosts</span></div>
+        <div class="ref-card"><span class="name">/26</span><span class="detail">64</span><span class="note">62 Hosts</span></div>
+        <div class="ref-card"><span class="name">/27</span><span class="detail">32</span><span class="note">30 Hosts</span></div>
+        <div class="ref-card"><span class="name">/28</span><span class="detail">16</span><span class="note">14 Hosts</span></div>
+        <div class="ref-card"><span class="name">/29</span><span class="detail">8</span><span class="note">6 Hosts</span></div>
+        <div class="ref-card"><span class="name">/30</span><span class="detail">4</span><span class="note">2 Hosts</span></div>
+      </div>
+      <p class="demo-hint">/30 mit 2 nutzbaren Hosts ist die klassische Größe für Punkt-zu-Punkt-Verbindungen zwischen zwei Routern.</p>
+    </section>
+
+    <hr class="divider">
+
+    <section>
+      <h2>IPv4 vs. IPv6, private Bereiche</h2>
+      <p>IPv4 ist 32 Bit lang (rund 4,3 Mrd. Adressen) und dezimal geschrieben. IPv6 ist 128 Bit lang, hexadezimal mit Doppelpunkten geschrieben und hat einen riesigen Adressraum – eingeführt, weil IPv4-Adressen knapp wurden.</p>
+
+      <div class="chip-row narrow" aria-hidden="true">
+        <div class="chip"><span class="val">IPv4</span><span class="place">192.168.1.1</span></div>
+        <div class="chip"><span class="val">IPv6</span><span class="place">2001:db8::1</span></div>
+      </div>
+
+      <p style="margin-top:18px">Für private Netze sind feste Adressbereiche reserviert, die im Internet nicht geroutet werden (Stichwort NAT):</p>
+
+      <div class="ref-grid cols-3" aria-hidden="true">
+        <div class="ref-card"><span class="name">10.0.0.0/8</span><span class="detail">Klasse A</span><span class="note">~16,7 Mio. Adressen</span></div>
+        <div class="ref-card"><span class="name">172.16.0.0/12</span><span class="detail">Klasse B</span><span class="note">~1 Mio. Adressen</span></div>
+        <div class="ref-card"><span class="name">192.168.0.0/16</span><span class="detail">Klasse C</span><span class="note">~65.000 Adressen</span></div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <section>
+      <h2>Wichtige Ports & Protokolle</h2>
+      <p>Ports identifizieren, welcher Dienst auf Schicht 4 gemeint ist:</p>
+
+      <div class="ref-grid cols-4" aria-hidden="true">
+        <div class="ref-card"><span class="name">20/21</span><span class="detail">FTP</span><span class="note">TCP</span></div>
+        <div class="ref-card"><span class="name">22</span><span class="detail">SSH</span><span class="note">TCP</span></div>
+        <div class="ref-card"><span class="name">25</span><span class="detail">SMTP</span><span class="note">TCP</span></div>
+        <div class="ref-card"><span class="name">53</span><span class="detail">DNS</span><span class="note">TCP/UDP</span></div>
+        <div class="ref-card"><span class="name">80</span><span class="detail">HTTP</span><span class="note">TCP</span></div>
+        <div class="ref-card"><span class="name">443</span><span class="detail">HTTPS</span><span class="note">TCP</span></div>
+        <div class="ref-card"><span class="name">110</span><span class="detail">POP3</span><span class="note">TCP</span></div>
+        <div class="ref-card"><span class="name">143</span><span class="detail">IMAP</span><span class="note">TCP</span></div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <section>
+      <h2>Übungsaufgaben</h2>
+      <p class="lede">Gleicher Aufbau wie in den anderen Tabs, fünf Stufen von einfach bis kniffliger.</p>
+
+      <div class="levels">
+
+        <div class="level">
+          <div class="level-badge">1</div>
+          <h3>Grundlagen</h3>
+          <p class="level-desc">Einfacher Einstieg – Begriffe und Notation.</p>
+
+          <div class="task">
+            <div class="task-q"><p>Wie viele Bit hat eine IPv4-Adresse?</p><span class="num">1 von 3</span></div>
+            <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer"><span class="mono">32 Bit</span> (4 Oktette à 8 Bit).</div></details>
+          </div>
+          <div class="task">
+            <div class="task-q"><p>Was bedeutet die Schreibweise /24?</p><span class="num">2 von 3</span></div>
+            <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer">Die ersten 24 Bit sind der Netzanteil – Subnetzmaske <span class="mono">255.255.255.0</span>.</div></details>
+          </div>
+          <div class="task">
+            <div class="task-q"><p>Subnetzmaske zu /26 in Dezimalschreibweise?</p><span class="num">3 von 3</span></div>
+            <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer"><span class="mono">255.255.255.192</span></div></details>
+          </div>
+        </div>
+
+        <div class="level">
+          <div class="level-badge">2</div>
+          <h3>Netz- und Broadcastadresse</h3>
+          <p class="level-desc">Wie im Demo oben, jetzt selbst rechnen.</p>
+
+          <div class="task">
+            <div class="task-q"><p class="mono">192.168.1.50 /26</p><span class="num">1 von 2 · Netzadresse?</span></div>
+            <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer">Blockgröße 64, 50 liegt im Block 0–63 → Netzadresse <span class="mono">192.168.1.0</span></div></details>
+          </div>
+          <div class="task">
+            <div class="task-q"><p class="mono">10.0.0.10 /28</p><span class="num">2 von 2 · Broadcastadresse?</span></div>
+            <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer">Blockgröße 16, 10 liegt im Block 0–15 → Broadcastadresse <span class="mono">10.0.0.15</span></div></details>
+          </div>
+        </div>
+
+        <div class="level">
+          <div class="level-badge">3</div>
+          <h3>Nutzbare Hosts berechnen</h3>
+          <p class="level-desc">Formel 2^(32−Präfix) − 2 anwenden.</p>
+
+          <div class="task">
+            <div class="task-q"><p>Wie viele nutzbare Hosts bei /28?</p><span class="num">1 von 2</span></div>
+            <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer">2⁴ − 2 = 16 − 2 = <span class="mono">14</span></div></details>
+          </div>
+          <div class="task">
+            <div class="task-q"><p>Wie viele nutzbare Hosts bei /30?</p><span class="num">2 von 2</span></div>
+            <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer">2² − 2 = <span class="mono">2</span> – typisch für Punkt-zu-Punkt-Verbindungen.</div></details>
+          </div>
+        </div>
+
+        <div class="level">
+          <div class="level-badge">4</div>
+          <h3>Kombinierte Subnetzberechnung</h3>
+          <p class="level-desc">Etwas kniffliger – alles zusammen anwenden.</p>
+
+          <div class="task">
+            <div class="task-q"><p>Gegeben: 172.16.5.100 /27. Berechne Netzadresse, Broadcastadresse und Anzahl nutzbarer Hosts.</p></div>
+            <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer">Blockgröße 32. 100 liegt im Block 96–127.<br>Netzadresse: <span class="mono">172.16.5.96</span><br>Broadcastadresse: <span class="mono">172.16.5.127</span><br>Nutzbare Hosts: 32 − 2 = <span class="mono">30</span></div></details>
+          </div>
+          <div class="task">
+            <div class="task-q"><p>Ihr braucht mindestens 100 nutzbare Host-Adressen. Welches ist das größte Präfix (kleinste Subnetz), das dafür noch reicht?</p></div>
+            <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer">2⁷ − 2 = 126 ≥ 100, 2⁶ − 2 = 62 < 100 → das größte passende Präfix ist <span class="mono">/25</span> (126 nutzbare Hosts).</div></details>
+          </div>
+        </div>
+
+        <div class="level">
+          <div class="level-badge">5</div>
+          <h3>Bonus</h3>
+          <p class="level-desc">Etwas kniffliger – komplette Rechnung oder Fehler finden.</p>
+
+          <div class="task">
+            <div class="task-q"><p>Rechne komplett durch: 192.168.20.200 /29 – Subnetzmaske, Netzadresse, Broadcastadresse, nutzbare Hosts, Hostbereich.</p></div>
+            <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer">Subnetzmaske: <span class="mono">255.255.255.248</span><br>Blockgröße 8, 200 ist exakt Vielfaches von 8 (200 ÷ 8 = 25) → Netzadresse: <span class="mono">192.168.20.200</span><br>Broadcastadresse: <span class="mono">192.168.20.207</span><br>Nutzbare Hosts: <span class="mono">6</span> (.201 – .206)</div></details>
+          </div>
+          <div class="task">
+            <div class="task-q"><p>Stimmt diese Behauptung? „Die Adresse 192.168.1.65 /26 ist die Broadcastadresse ihres Subnetzes." – nachrechnen und gegebenenfalls korrigieren.</p></div>
+            <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer">Falsch. Blockgröße 64: 65 liegt im Block 64–127. Netzadresse ist <span class="mono">192.168.1.64</span>, Broadcastadresse ist <span class="mono">192.168.1.127</span>. 65 ist stattdessen die erste nutzbare Hostadresse.</div></details>
+          </div>
 
         </div>
 
@@ -1359,7 +1698,9 @@
     bin: document.getElementById('panel-bin'),
     hex: document.getElementById('panel-hex'),
     okt: document.getElementById('panel-okt'),
-    raid: document.getElementById('panel-raid')
+    raid: document.getElementById('panel-raid'),
+    netz: document.getElementById('panel-netz'),
+    tcpip: document.getElementById('panel-tcpip')
   };
   tabButtons.forEach(function(btn){
     btn.addEventListener('click', function(){
@@ -1382,7 +1723,6 @@
     });
     total.textContent = sum;
   }
-
   switches.forEach(function(sw, i){
     var initiallyOn = sw.querySelector('.bit-value').textContent.trim() === '1';
     sw.setAttribute('aria-pressed', initiallyOn ? 'true' : 'false');
@@ -1393,8 +1733,8 @@
       renderBits();
     });
   });
-
   renderBits();
+
   var hexChars = ['0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'];
   var dials = Array.prototype.slice.call(document.querySelectorAll('#hex-dials .hex-dial'));
   var hexDecimalEl = document.getElementById('hex-decimal');
@@ -1420,6 +1760,7 @@
     });
   });
   renderHex();
+
   var permGroups = Array.prototype.slice.call(document.querySelectorAll('#perm-groups .perm-group'));
   var permOctalEl = document.getElementById('perm-octal');
   function renderPerm(){
@@ -1437,7 +1778,6 @@
     });
     permOctalEl.textContent = result;
   }
-
   permGroups.forEach(function(g){
     var gSwitches = Array.prototype.slice.call(g.querySelectorAll('.perm-switch'));
     gSwitches.forEach(function(sw){
@@ -1450,7 +1790,6 @@
       });
     });
   });
-
   renderPerm();
 
   var raidLevelButtons = Array.prototype.slice.call(document.querySelectorAll('#raid-levels .raid-level-btn'));
@@ -1462,20 +1801,16 @@
   var diskPlusBtn = document.getElementById('disk-plus');
   var sizeMinusBtn = document.getElementById('size-minus');
   var sizePlusBtn = document.getElementById('size-plus');
-
   var sizes = [1, 2, 4, 8, 16];
   var minDisks = { 0: 2, 1: 2, 5: 3, 6: 4, 10: 4 };
   var maxDisks = 16;
-
   var raidState = { level: 5, disks: 5, sizeIndex: 2 };
-
   function clampDisks(){
     var min = minDisks[raidState.level];
     if (raidState.disks < min) raidState.disks = min;
     if (raidState.disks > maxDisks) raidState.disks = maxDisks;
     if (raidState.level === 10 && raidState.disks % 2 !== 0) raidState.disks += 1;
   }
-
   function usableTB(level, n, size){
     if (level === 0) return n * size;
     if (level === 1) return size;
@@ -1484,7 +1819,6 @@
     if (level === 10) return (n / 2) * size;
     return 0;
   }
-
   function toleranceText(level, n){
     if (level === 0) return '0 Platten';
     if (level === 1) return (n - 1) + ' Platte(n)';
@@ -1493,7 +1827,6 @@
     if (level === 10) return '1 Platte je Spiegelpaar';
     return '';
   }
-
   function renderRaid(){
     clampDisks();
     var size = sizes[raidState.sizeIndex];
@@ -1505,37 +1838,119 @@
       btn.classList.toggle('is-on', parseInt(btn.getAttribute('data-level'), 10) === raidState.level);
     });
   }
-
   raidLevelButtons.forEach(function(btn){
     btn.addEventListener('click', function(){
       raidState.level = parseInt(btn.getAttribute('data-level'), 10);
       renderRaid();
     });
   });
-
   diskMinusBtn.addEventListener('click', function(){
     var step = raidState.level === 10 ? 2 : 1;
     raidState.disks -= step;
     renderRaid();
   });
-
   diskPlusBtn.addEventListener('click', function(){
     var step = raidState.level === 10 ? 2 : 1;
     raidState.disks += step;
     renderRaid();
   });
-
   sizeMinusBtn.addEventListener('click', function(){
     if (raidState.sizeIndex > 0) raidState.sizeIndex -= 1;
     renderRaid();
   });
-
   sizePlusBtn.addEventListener('click', function(){
     if (raidState.sizeIndex < sizes.length - 1) raidState.sizeIndex += 1;
     renderRaid();
   });
-
   renderRaid();
+
+  var deviceButtons = Array.prototype.slice.call(document.querySelectorAll('#device-choice .choice-btn'));
+  var deviceData = {
+    hub: {
+      layer: '1 – Bitübertragung',
+      fn: 'Leitet elektrische Signale unverändert an alle anderen Ports weiter',
+      coll: '1 gemeinsame für alle Ports',
+      bcast: '1 gemeinsame für alle Ports'
+    },
+    switch: {
+      layer: '2 – Sicherung',
+      fn: 'Leitet Frames anhand der MAC-Adresstabelle gezielt an den richtigen Port weiter',
+      coll: '1 pro Port',
+      bcast: '1 gemeinsame (ohne VLANs)'
+    },
+    router: {
+      layer: '3 – Vermittlung',
+      fn: 'Leitet Pakete anhand der IP-Adresse zwischen unterschiedlichen Netzen weiter',
+      coll: '1 pro Port',
+      bcast: '1 pro Port / Netz – trennt Broadcastdomänen'
+    },
+    ap: {
+      layer: '1–2 – Bitübertragung & Sicherung',
+      fn: 'Verbindet WLAN-Clients per Funk mit einem bestehenden kabelgebundenen Netz',
+      coll: '1 gemeinsames Funkmedium für alle Clients',
+      bcast: 'Teil der Broadcastdomäne, an die er angeschlossen ist'
+    }
+  };
+  var deviceLayerEl = document.getElementById('device-layer');
+  var deviceFunctionEl = document.getElementById('device-function');
+  var deviceCollisionEl = document.getElementById('device-collision');
+  var deviceBroadcastEl = document.getElementById('device-broadcast');
+  function renderDevice(key){
+    var d = deviceData[key];
+    deviceLayerEl.textContent = d.layer;
+    deviceFunctionEl.textContent = d.fn;
+    deviceCollisionEl.textContent = d.coll;
+    deviceBroadcastEl.textContent = d.bcast;
+    deviceButtons.forEach(function(btn){
+      btn.classList.toggle('is-on', btn.getAttribute('data-device') === key);
+    });
+  }
+  deviceButtons.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      renderDevice(btn.getAttribute('data-device'));
+    });
+  });
+  renderDevice('switch');
+
+  var subnetOctetDisplay = document.getElementById('subnet-octet-display');
+  var subnetPrefixDisplay = document.getElementById('subnet-prefix-display');
+  var subnetIpEl = document.getElementById('subnet-ip');
+  var subnetMaskEl = document.getElementById('subnet-mask');
+  var subnetNetworkEl = document.getElementById('subnet-network');
+  var subnetBroadcastEl = document.getElementById('subnet-broadcast');
+  var subnetHostsEl = document.getElementById('subnet-hosts');
+  var octetMinusBtn = document.getElementById('octet-minus');
+  var octetPlusBtn = document.getElementById('octet-plus');
+  var prefixMinusBtn = document.getElementById('prefix-minus');
+  var prefixPlusBtn = document.getElementById('prefix-plus');
+  var subnetState = { octet: 130, prefix: 26 };
+  function renderSubnet(){
+    if (subnetState.octet < 0) subnetState.octet = 0;
+    if (subnetState.octet > 255) subnetState.octet = 255;
+    if (subnetState.prefix < 24) subnetState.prefix = 24;
+    if (subnetState.prefix > 30) subnetState.prefix = 30;
+    var subnetSize = Math.pow(2, 32 - subnetState.prefix);
+    var networkOctet = Math.floor(subnetState.octet / subnetSize) * subnetSize;
+    var broadcastOctet = networkOctet + subnetSize - 1;
+    var maskOctet = 256 - subnetSize;
+    var usable = subnetSize - 2;
+    var first = networkOctet + 1;
+    var last = broadcastOctet - 1;
+    subnetOctetDisplay.textContent = subnetState.octet;
+    subnetPrefixDisplay.textContent = '/' + subnetState.prefix;
+    subnetIpEl.textContent = '192.168.1.' + subnetState.octet;
+    subnetMaskEl.textContent = '255.255.255.' + maskOctet + ' (/' + subnetState.prefix + ')';
+    subnetNetworkEl.textContent = '192.168.1.' + networkOctet;
+    subnetBroadcastEl.textContent = '192.168.1.' + broadcastOctet;
+    subnetHostsEl.textContent = usable + ' (' + first + '–' + last + ')';
+  }
+
+  octetMinusBtn.addEventListener('click', function(){ subnetState.octet -= 1; renderSubnet(); });
+  octetPlusBtn.addEventListener('click', function(){ subnetState.octet += 1; renderSubnet(); });
+  prefixMinusBtn.addEventListener('click', function(){ subnetState.prefix -= 1; renderSubnet(); });
+  prefixPlusBtn.addEventListener('click', function(){ subnetState.prefix += 1; renderSubnet(); });
+
+  renderSubnet();
 })();
 </script>
 
