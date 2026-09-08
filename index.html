@@ -486,11 +486,11 @@
       <button class="tab" role="tab" id="tab-raid" aria-selected="false" aria-controls="panel-raid" data-tab="raid">RAID</button>
       <button class="tab" role="tab" id="tab-netz" aria-selected="false" aria-controls="panel-netz" data-tab="netz">Netzwerke</button>
       <button class="tab" role="tab" id="tab-tcpip" aria-selected="false" aria-controls="panel-tcpip" data-tab="tcpip">TCP/IP</button>
+      <button class="tab" role="tab" id="tab-eth" aria-selected="false" aria-controls="panel-eth" data-tab="eth">Ethernet</button>
     </div>
   </div>
 </div>
 <div class="wrap">
-
   <div id="panel-bin" role="tabpanel" aria-labelledby="tab-bin">
 
     <section style="padding-top:36px">
@@ -683,9 +683,6 @@
       </div>
     </section>
   </div>
-
-
-
   <div id="panel-hex" role="tabpanel" aria-labelledby="tab-hex" hidden>
 
     <section style="padding-top:36px">
@@ -1112,7 +1109,6 @@
     </section>
 
   </div>
-
   <div id="panel-raid" role="tabpanel" aria-labelledby="tab-raid" hidden>
 
     <section style="padding-top:36px">
@@ -1296,7 +1292,6 @@
       </div>
     </section>
   </div>
-
   <div id="panel-netz" role="tabpanel" aria-labelledby="tab-netz" hidden>
 
     <section style="padding-top:36px">
@@ -1319,20 +1314,15 @@
       </div>
       <p class="demo-hint">Kollisionsdomäne = wie viele Geräte sich das Medium teilen und Kollisionen verursachen können. Broadcastdomäne = wie weit sich ein Broadcast ausbreitet.</p>
     </section>
-
     <hr class="divider">
-
     <section>
       <h2>Warum Schichtmodelle?</h2>
       <p>Netzwerkkommunikation ist komplex – Schichtmodelle zerlegen sie in überschaubare Teilaufgaben. Jede Schicht löst genau ein Problem und reicht das Ergebnis an die nächste weiter. Vorteil: Hersteller können Geräte oder Software für eine einzelne Schicht bauen, ohne den Rest zu kennen. Und bei der Fehlersuche lässt sich das Problem schichtweise eingrenzen, statt wild zu raten.</p>
     </section>
-
     <hr class="divider">
-
     <section>
       <h2>OSI-Modell vs. TCP/IP-Modell</h2>
       <p>Das OSI-Modell hat 7 Schichten, das (in der Praxis genutzte) TCP/IP-Modell fasst mehrere davon zusammen:</p>
-
       <div class="calc-steps">
         <div><strong>7 Anwendung</strong> – HTTP, DNS, SMTP … <span class="mono">→ TCP/IP: Anwendung</span></div>
         <div><strong>6 Darstellung</strong> – Datenformat, Verschlüsselung <span class="mono">→ TCP/IP: Anwendung</span></div>
@@ -1460,12 +1450,9 @@
           </div>
 
         </div>
-
       </div>
     </section>
-
   </div>
-
   <div id="panel-tcpip" role="tabpanel" aria-labelledby="tab-tcpip" hidden>
 
     <section style="padding-top:36px">
@@ -1678,17 +1665,12 @@
             <div class="task-q"><p>Stimmt diese Behauptung? „Die Adresse 192.168.1.65 /26 ist die Broadcastadresse ihres Subnetzes." – nachrechnen und gegebenenfalls korrigieren.</p></div>
             <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer">Falsch. Blockgröße 64: 65 liegt im Block 64–127. Netzadresse ist <span class="mono">192.168.1.64</span>, Broadcastadresse ist <span class="mono">192.168.1.127</span>. 65 ist stattdessen die erste nutzbare Hostadresse.</div></details>
           </div>
-
         </div>
-
       </div>
     </section>
-
   </div>
-
   <footer>
   </footer>
-
 </div>
 
 <script>
@@ -1702,6 +1684,7 @@
     netz: document.getElementById('panel-netz'),
     tcpip: document.getElementById('panel-tcpip')
   };
+
   tabButtons.forEach(function(btn){
     btn.addEventListener('click', function(){
       var target = btn.getAttribute('data-tab');
@@ -1709,7 +1692,6 @@
       Object.keys(panels).forEach(function(key){ panels[key].hidden = key !== target; });
     });
   });
-
   var values = [128, 64, 32, 16, 8, 4, 2, 1];
   var switches = Array.prototype.slice.call(document.querySelectorAll('#bit-switches .bit-switch'));
   var total = document.getElementById('bit-total');
@@ -1734,7 +1716,6 @@
     });
   });
   renderBits();
-
   var hexChars = ['0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'];
   var dials = Array.prototype.slice.call(document.querySelectorAll('#hex-dials .hex-dial'));
   var hexDecimalEl = document.getElementById('hex-decimal');
@@ -1760,7 +1741,6 @@
     });
   });
   renderHex();
-
   var permGroups = Array.prototype.slice.call(document.querySelectorAll('#perm-groups .perm-group'));
   var permOctalEl = document.getElementById('perm-octal');
   function renderPerm(){
@@ -1791,7 +1771,6 @@
     });
   });
   renderPerm();
-
   var raidLevelButtons = Array.prototype.slice.call(document.querySelectorAll('#raid-levels .raid-level-btn'));
   var diskCountEl = document.getElementById('disk-count');
   var diskSizeEl = document.getElementById('disk-size');
@@ -1863,7 +1842,6 @@
     renderRaid();
   });
   renderRaid();
-
   var deviceButtons = Array.prototype.slice.call(document.querySelectorAll('#device-choice .choice-btn'));
   var deviceData = {
     hub: {
@@ -1891,10 +1869,12 @@
       bcast: 'Teil der Broadcastdomäne, an die er angeschlossen ist'
     }
   };
+
   var deviceLayerEl = document.getElementById('device-layer');
   var deviceFunctionEl = document.getElementById('device-function');
   var deviceCollisionEl = document.getElementById('device-collision');
   var deviceBroadcastEl = document.getElementById('device-broadcast');
+
   function renderDevice(key){
     var d = deviceData[key];
     deviceLayerEl.textContent = d.layer;
@@ -1905,13 +1885,13 @@
       btn.classList.toggle('is-on', btn.getAttribute('data-device') === key);
     });
   }
+
   deviceButtons.forEach(function(btn){
     btn.addEventListener('click', function(){
       renderDevice(btn.getAttribute('data-device'));
     });
   });
   renderDevice('switch');
-
   var subnetOctetDisplay = document.getElementById('subnet-octet-display');
   var subnetPrefixDisplay = document.getElementById('subnet-prefix-display');
   var subnetIpEl = document.getElementById('subnet-ip');
@@ -1929,6 +1909,7 @@
     if (subnetState.octet > 255) subnetState.octet = 255;
     if (subnetState.prefix < 24) subnetState.prefix = 24;
     if (subnetState.prefix > 30) subnetState.prefix = 30;
+
     var subnetSize = Math.pow(2, 32 - subnetState.prefix);
     var networkOctet = Math.floor(subnetState.octet / subnetSize) * subnetSize;
     var broadcastOctet = networkOctet + subnetSize - 1;
@@ -1936,6 +1917,7 @@
     var usable = subnetSize - 2;
     var first = networkOctet + 1;
     var last = broadcastOctet - 1;
+
     subnetOctetDisplay.textContent = subnetState.octet;
     subnetPrefixDisplay.textContent = '/' + subnetState.prefix;
     subnetIpEl.textContent = '192.168.1.' + subnetState.octet;
