@@ -1669,12 +1669,194 @@
       </div>
     </section>
   </div>
+
+    <div id="panel-eth" role="tabpanel" aria-labelledby="tab-eth" hidden>
+
+    <section style="padding-top:36px">
+      <p class="lede">Sechs Felder, ein Klick: welches Feld im Ethernet-Frame macht was, und wie groß ist es?</p>
+
+      <div class="demo-card">
+        <p class="demo-label">Interaktiv: Ethernet-Frame-Aufbau</p>
+        <div class="choice-row" id="frame-choice">
+          <button type="button" class="choice-btn" data-field="praeambel">Präambel</button>
+          <button type="button" class="choice-btn is-on" data-field="zielmac">Ziel-MAC</button>
+          <button type="button" class="choice-btn" data-field="quellmac">Quell-MAC</button>
+          <button type="button" class="choice-btn" data-field="typ">Typ</button>
+          <button type="button" class="choice-btn" data-field="payload">Payload</button>
+          <button type="button" class="choice-btn" data-field="crc">CRC</button>
+        </div>
+        <div class="info-panel">
+          <div class="info-row"><span class="info-label">Größe</span><span class="info-value" id="frame-size">6 Byte</span></div>
+          <div class="info-row"><span class="info-label">Funktion</span><span class="info-value" id="frame-function">Hardwareadresse des Empfängers</span></div>
+          <div class="info-row"><span class="info-label">Beispiel</span><span class="info-value" id="frame-example">FF:FF:FF:FF:FF:FF = Broadcast an alle</span></div>
+        </div>
+      </div>
+      <p class="demo-hint">Gesamtgröße eines Ethernet-Frames (ohne Präambel): 64–1518 Byte.</p>
+    </section>
+
+    <hr class="divider">
+
+    <section>
+      <h2>Was ist Ethernet?</h2>
+      <p>Ethernet ist der Standard für kabelgebundene lokale Netze (LAN) auf Schicht 1 und 2. Er regelt, wie Bits auf das Kabel gebracht werden (Schicht 1) und wie Frames aufgebaut, adressiert und geprüft werden (Schicht 2). Fast jedes kabelgebundene Netz nutzt heute Ethernet.</p>
+    </section>
+
+    <hr class="divider">
+
+    <section>
+      <h2>MAC-Adressen</h2>
+      <p>Erinnerst du dich an den Hex-Tab? Eine MAC-Adresse ist nichts anderes als 6 Byte, geschrieben als 12 Hex-Ziffern in 6 Zweierpaaren. Die ersten 3 Byte sind die OUI (Organizationally Unique Identifier) – die Herstellerkennung. Die letzten 3 Byte sind die individuelle Gerätenummer.</p>
+
+      <div class="chip-row six" aria-hidden="true">
+        <div class="chip on"><span class="val">00</span><span class="place">OUI</span></div>
+        <div class="chip on"><span class="val">1A</span><span class="place">OUI</span></div>
+        <div class="chip on"><span class="val">2B</span><span class="place">OUI</span></div>
+        <div class="chip"><span class="val">3C</span><span class="place">Gerät</span></div>
+        <div class="chip"><span class="val">4D</span><span class="place">Gerät</span></div>
+        <div class="chip"><span class="val">5E</span><span class="place">Gerät</span></div>
+      </div>
+      <p class="sum-line">00:1A:2B = Hersteller (OUI), 3C:4D:5E = individuelle Gerätenummer</p>
+
+      <p style="margin-top:18px">MAC vs. IP: Die MAC-Adresse ist auf Schicht 2, herstellerseitig vergeben und ändert sich nicht, egal in welchem Netz das Gerät hängt. Die IP-Adresse ist auf Schicht 3, logisch vergeben und hängt vom aktuellen Netz ab.</p>
+    </section>
+
+    <hr class="divider">
+
+    <section>
+      <h2>Wie ein Switch lernt: die MAC-Adresstabelle</h2>
+      <p>Ein Switch merkt sich, an welchem Port welche Quell-MAC-Adresse zuletzt gesehen wurde – gelesen aus dem Quell-MAC-Feld jedes ankommenden Frames.</p>
+
+      <div class="calc-steps">
+        <div>Frame kommt an Port 3 an, Quell-MAC <strong>AA:AA</strong> → Tabelle lernt: AA:AA → Port 3</div>
+        <div>Ziel-MAC <strong>BB:BB</strong> unbekannt → Flooding an alle Ports außer Port 3</div>
+        <div>Antwort von BB:BB kommt an Port 5 an → Tabelle lernt: BB:BB → Port 5</div>
+        <div>Ab jetzt: Frames zwischen AA:AA und BB:BB werden gezielt weitergeleitet</div>
+      </div>
+      <p class="demo-hint">Store-and-Forward: Der Switch puffert den kompletten Frame, prüft die CRC-Prüfsumme und leitet nur fehlerfreie Frames weiter.</p>
+    </section>
+
+    <hr class="divider">
+
+    <section>
+      <h2>VLANs</h2>
+      <p>Ein VLAN (Virtual LAN) teilt ein physisches Netz in mehrere logische Netze auf, ohne extra Kabel oder Switches zu brauchen. Jeder Port bekommt eine VLAN-ID; 802.1Q fügt dem Ethernet-Frame dafür ein 4-Byte-Tag hinzu. Geräte in unterschiedlichen VLANs können nur über einen Router oder Layer-3-Switch miteinander kommunizieren – VLANs trennen Broadcastdomänen, genau wie im Netzwerke-Tab beschrieben.</p>
+    </section>
+
+    <hr class="divider">
+
+    <section>
+      <h2>Duplex und Geschwindigkeiten</h2>
+      <p>Halbduplex: nur eine Richtung gleichzeitig, wie früher beim Hub – Kollisionen möglich. Vollduplex: gleichzeitig senden und empfangen, Standard bei Switches heute – keine Kollisionen mehr.</p>
+
+      <div class="ref-grid cols-4" aria-hidden="true">
+        <div class="ref-card"><span class="name">10 Mbit/s</span><span class="detail">Ethernet</span><span class="note">historisch</span></div>
+        <div class="ref-card"><span class="name">100 Mbit/s</span><span class="detail">Fast Ethernet</span><span class="note">weit verbreitet</span></div>
+        <div class="ref-card"><span class="name">1 Gbit/s</span><span class="detail">Gigabit Ethernet</span><span class="note">heutiger Standard</span></div>
+        <div class="ref-card"><span class="name">10 Gbit/s</span><span class="detail">10-Gigabit Ethernet</span><span class="note">Server, Backbone</span></div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <section>
+      <h2>Übungsaufgaben</h2>
+      <p class="lede">Gleicher Aufbau wie in den anderen Tabs, fünf Stufen von einfach bis kniffliger.</p>
+
+      <div class="levels">
+
+        <div class="level">
+          <div class="level-badge">1</div>
+          <h3>Frame-Grundlagen</h3>
+          <p class="level-desc">Einfacher Einstieg – Begriffe abrufen.</p>
+
+          <div class="task">
+            <div class="task-q"><p>Wie viele Byte ist eine MAC-Adresse lang?</p><span class="num">1 von 3</span></div>
+            <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer"><span class="mono">6 Byte</span> (48 Bit).</div></details>
+          </div>
+          <div class="task">
+            <div class="task-q"><p>Welches Feld im Ethernet-Frame sagt, welches Protokoll in den Nutzdaten steckt?</p><span class="num">2 von 3</span></div>
+            <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer">Das <span class="mono">Typ</span>-Feld (EtherType).</div></details>
+          </div>
+          <div class="task">
+            <div class="task-q"><p>Wofür steht CRC im Ethernet-Frame?</p><span class="num">3 von 3</span></div>
+            <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer">Prüfsumme zur Fehlererkennung (Cyclic Redundancy Check).</div></details>
+          </div>
+        </div>
+
+        <div class="level">
+          <div class="level-badge">2</div>
+          <h3>MAC-Adressen lesen</h3>
+          <p class="level-desc">Aufbau einer MAC-Adresse verstehen.</p>
+
+          <div class="task">
+            <div class="task-q"><p>Was verraten die ersten 3 Byte einer MAC-Adresse?</p></div>
+            <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer">Den Hersteller – die OUI (Organizationally Unique Identifier).</div></details>
+          </div>
+          <div class="task">
+            <div class="task-q"><p>Welche MAC-Adresse ist die Broadcast-Adresse?</p></div>
+            <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer"><span class="mono">FF:FF:FF:FF:FF:FF</span></div></details>
+          </div>
+        </div>
+
+        <div class="level">
+          <div class="level-badge">3</div>
+          <h3>Frame-Größen berechnen</h3>
+          <p class="level-desc">Ziel-MAC + Quell-MAC + Typ + Payload + CRC, ohne Präambel.</p>
+
+          <div class="task">
+            <div class="task-q"><p>Ein Frame hat 1200 Byte Nutzdaten. Wie groß ist der komplette Frame?</p></div>
+            <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer">6 + 6 + 2 + 1200 + 4 = <span class="mono">1218 Byte</span></div></details>
+          </div>
+          <div class="task">
+            <div class="task-q"><p>Wie groß ist der kleinstmögliche Frame, wenn die Nutzdaten mit Padding auf 46 Byte aufgefüllt werden?</p></div>
+            <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer">6 + 6 + 2 + 46 + 4 = <span class="mono">64 Byte</span></div></details>
+          </div>
+        </div>
+
+        <div class="level">
+          <div class="level-badge">4</div>
+          <h3>Switching verstehen</h3>
+          <p class="level-desc">Etwas kniffliger – auf ein Szenario übertragen.</p>
+
+          <div class="task">
+            <div class="task-q"><p>Ein leerer Switch bekommt an Port 1 einen Frame von PC A (MAC AA) an PC B (MAC BB), die dem Switch noch unbekannt ist. Was macht der Switch – und was lernt er dabei?</p></div>
+            <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer">Da BB unbekannt ist, flutet der Switch den Frame an alle Ports außer Port 1. Gleichzeitig lernt er aus dem Quell-MAC-Feld: AA ist an Port 1 erreichbar, und trägt das in die MAC-Adresstabelle ein.</div></details>
+          </div>
+          <div class="task">
+            <div class="task-q"><p>Warum prüft ein Switch beim Store-and-Forward die CRC-Prüfsumme, bevor er einen Frame weiterleitet?</p></div>
+            <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer">Damit beschädigte Frames (z. B. durch Störungen auf der Leitung) erkannt und verworfen werden, statt fehlerhafte Daten im Netz zu verteilen.</div></details>
+          </div>
+        </div>
+
+        <div class="level">
+          <div class="level-badge">5</div>
+          <h3>Bonus</h3>
+          <p class="level-desc">Etwas kniffliger – Verständnis statt Auswendiglernen.</p>
+
+          <div class="task">
+            <div class="task-q"><p>Zwei PCs stecken in unterschiedlichen VLANs am selben Switch. Können sie sich direkt Frames schicken?</p></div>
+            <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer">Nein. VLANs trennen Broadcastdomänen auf Schicht 2; Geräte in unterschiedlichen VLANs brauchen einen Router oder Layer-3-Switch, um zu kommunizieren – genau wie zwei getrennte physische Netze.</div></details>
+          </div>
+          <div class="task">
+            <div class="task-q"><p>Stimmt diese Behauptung? „Im Vollduplex-Betrieb kann es wie beim Hub weiterhin zu Kollisionen kommen, wenn Switch und PC gleichzeitig senden." – prüfen und gegebenenfalls korrigieren.</p></div>
+            <details><summary><span class="switch-dot"></span>Lösung</summary><div class="answer">Falsch. Im Vollduplex-Betrieb gibt es getrennte Sende- und Empfangsleitungen, sodass beide Seiten gleichzeitig senden können, ohne dass Kollisionen entstehen. Kollisionen sind ein Halbduplex-/Hub-Phänomen.</div></details>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </div>
+
   <footer>
   </footer>
+
 </div>
 
 <script>
 (function(){
+  // Tabs
   var tabButtons = document.querySelectorAll('.tab');
   var panels = {
     bin: document.getElementById('panel-bin'),
@@ -1682,7 +1864,8 @@
     okt: document.getElementById('panel-okt'),
     raid: document.getElementById('panel-raid'),
     netz: document.getElementById('panel-netz'),
-    tcpip: document.getElementById('panel-tcpip')
+    tcpip: document.getElementById('panel-tcpip'),
+    eth: document.getElementById('panel-eth')
   };
 
   tabButtons.forEach(function(btn){
@@ -1692,9 +1875,12 @@
       Object.keys(panels).forEach(function(key){ panels[key].hidden = key !== target; });
     });
   });
+
+  // Binary switches
   var values = [128, 64, 32, 16, 8, 4, 2, 1];
   var switches = Array.prototype.slice.call(document.querySelectorAll('#bit-switches .bit-switch'));
   var total = document.getElementById('bit-total');
+
   function renderBits(){
     var sum = 0;
     switches.forEach(function(sw, i){
@@ -1705,6 +1891,7 @@
     });
     total.textContent = sum;
   }
+
   switches.forEach(function(sw, i){
     var initiallyOn = sw.querySelector('.bit-value').textContent.trim() === '1';
     sw.setAttribute('aria-pressed', initiallyOn ? 'true' : 'false');
@@ -1715,11 +1902,15 @@
       renderBits();
     });
   });
+
   renderBits();
+
+  // Hex dials
   var hexChars = ['0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'];
   var dials = Array.prototype.slice.call(document.querySelectorAll('#hex-dials .hex-dial'));
   var hexDecimalEl = document.getElementById('hex-decimal');
   var hexBinaryEl = document.getElementById('hex-binary');
+
   function renderHex(){
     var val = 0;
     dials.forEach(function(d, i){
@@ -1731,6 +1922,7 @@
     while (bin.length < dials.length * 4) bin = '0' + bin;
     hexBinaryEl.textContent = bin;
   }
+
   dials.forEach(function(d, i){
     d.setAttribute('aria-label', (i === 0 ? '16er-Stelle' : '1er-Stelle') + ', aktuell ' + d.textContent.trim());
     d.addEventListener('click', function(){
@@ -1740,9 +1932,13 @@
       renderHex();
     });
   });
+
   renderHex();
+
+  // Octal permission demo
   var permGroups = Array.prototype.slice.call(document.querySelectorAll('#perm-groups .perm-group'));
   var permOctalEl = document.getElementById('perm-octal');
+
   function renderPerm(){
     var result = '';
     permGroups.forEach(function(g){
@@ -1758,6 +1954,7 @@
     });
     permOctalEl.textContent = result;
   }
+
   permGroups.forEach(function(g){
     var gSwitches = Array.prototype.slice.call(g.querySelectorAll('.perm-switch'));
     gSwitches.forEach(function(sw){
@@ -1770,7 +1967,10 @@
       });
     });
   });
+
   renderPerm();
+
+  // RAID calculator
   var raidLevelButtons = Array.prototype.slice.call(document.querySelectorAll('#raid-levels .raid-level-btn'));
   var diskCountEl = document.getElementById('disk-count');
   var diskSizeEl = document.getElementById('disk-size');
@@ -1780,16 +1980,20 @@
   var diskPlusBtn = document.getElementById('disk-plus');
   var sizeMinusBtn = document.getElementById('size-minus');
   var sizePlusBtn = document.getElementById('size-plus');
+
   var sizes = [1, 2, 4, 8, 16];
   var minDisks = { 0: 2, 1: 2, 5: 3, 6: 4, 10: 4 };
   var maxDisks = 16;
+
   var raidState = { level: 5, disks: 5, sizeIndex: 2 };
+
   function clampDisks(){
     var min = minDisks[raidState.level];
     if (raidState.disks < min) raidState.disks = min;
     if (raidState.disks > maxDisks) raidState.disks = maxDisks;
     if (raidState.level === 10 && raidState.disks % 2 !== 0) raidState.disks += 1;
   }
+
   function usableTB(level, n, size){
     if (level === 0) return n * size;
     if (level === 1) return size;
@@ -1798,6 +2002,7 @@
     if (level === 10) return (n / 2) * size;
     return 0;
   }
+
   function toleranceText(level, n){
     if (level === 0) return '0 Platten';
     if (level === 1) return (n - 1) + ' Platte(n)';
@@ -1806,6 +2011,7 @@
     if (level === 10) return '1 Platte je Spiegelpaar';
     return '';
   }
+
   function renderRaid(){
     clampDisks();
     var size = sizes[raidState.sizeIndex];
@@ -1817,31 +2023,39 @@
       btn.classList.toggle('is-on', parseInt(btn.getAttribute('data-level'), 10) === raidState.level);
     });
   }
+
   raidLevelButtons.forEach(function(btn){
     btn.addEventListener('click', function(){
       raidState.level = parseInt(btn.getAttribute('data-level'), 10);
       renderRaid();
     });
   });
+
   diskMinusBtn.addEventListener('click', function(){
     var step = raidState.level === 10 ? 2 : 1;
     raidState.disks -= step;
     renderRaid();
   });
+
   diskPlusBtn.addEventListener('click', function(){
     var step = raidState.level === 10 ? 2 : 1;
     raidState.disks += step;
     renderRaid();
   });
+
   sizeMinusBtn.addEventListener('click', function(){
     if (raidState.sizeIndex > 0) raidState.sizeIndex -= 1;
     renderRaid();
   });
+
   sizePlusBtn.addEventListener('click', function(){
     if (raidState.sizeIndex < sizes.length - 1) raidState.sizeIndex += 1;
     renderRaid();
   });
+
   renderRaid();
+
+  // Device explorer (Netzwerke tab)
   var deviceButtons = Array.prototype.slice.call(document.querySelectorAll('#device-choice .choice-btn'));
   var deviceData = {
     hub: {
@@ -1885,12 +2099,16 @@
       btn.classList.toggle('is-on', btn.getAttribute('data-device') === key);
     });
   }
+
   deviceButtons.forEach(function(btn){
     btn.addEventListener('click', function(){
       renderDevice(btn.getAttribute('data-device'));
     });
   });
+
   renderDevice('switch');
+
+  // Subnet calculator (TCP/IP tab)
   var subnetOctetDisplay = document.getElementById('subnet-octet-display');
   var subnetPrefixDisplay = document.getElementById('subnet-prefix-display');
   var subnetIpEl = document.getElementById('subnet-ip');
@@ -1902,7 +2120,9 @@
   var octetPlusBtn = document.getElementById('octet-plus');
   var prefixMinusBtn = document.getElementById('prefix-minus');
   var prefixPlusBtn = document.getElementById('prefix-plus');
+
   var subnetState = { octet: 130, prefix: 26 };
+
   function renderSubnet(){
     if (subnetState.octet < 0) subnetState.octet = 0;
     if (subnetState.octet > 255) subnetState.octet = 255;
@@ -1932,6 +2152,39 @@
   prefixPlusBtn.addEventListener('click', function(){ subnetState.prefix += 1; renderSubnet(); });
 
   renderSubnet();
+
+  // Ethernet frame explorer
+  var frameButtons = Array.prototype.slice.call(document.querySelectorAll('#frame-choice .choice-btn'));
+  var frameData = {
+    praeambel: { size: '8 Byte', fn: 'Synchronisationsmuster – hilft dem Empfänger, den Bit-Takt zu erkennen', ex: '10101010 … 7× wiederholt + Start-Byte' },
+    zielmac: { size: '6 Byte', fn: 'Hardwareadresse des Empfängers', ex: 'FF:FF:FF:FF:FF:FF = Broadcast an alle' },
+    quellmac: { size: '6 Byte', fn: 'Hardwareadresse des Absenders', ex: 'z. B. 00:1A:2B:3C:4D:5E' },
+    typ: { size: '2 Byte', fn: 'Gibt an, welches Protokoll in den Nutzdaten steckt', ex: '0x0800 = IPv4, 0x0806 = ARP' },
+    payload: { size: '46–1500 Byte', fn: 'Die eigentlichen Nutzdaten, z. B. ein IP-Paket', ex: 'zu klein? wird mit Padding aufgefüllt' },
+    crc: { size: '4 Byte', fn: 'Prüfsumme zur Fehlererkennung', ex: 'Empfänger berechnet neu & vergleicht' }
+  };
+
+  var frameSizeEl = document.getElementById('frame-size');
+  var frameFunctionEl = document.getElementById('frame-function');
+  var frameExampleEl = document.getElementById('frame-example');
+
+  function renderFrame(key){
+    var d = frameData[key];
+    frameSizeEl.textContent = d.size;
+    frameFunctionEl.textContent = d.fn;
+    frameExampleEl.textContent = d.ex;
+    frameButtons.forEach(function(btn){
+      btn.classList.toggle('is-on', btn.getAttribute('data-field') === key);
+    });
+  }
+
+  frameButtons.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      renderFrame(btn.getAttribute('data-field'));
+    });
+  });
+
+  renderFrame('zielmac');
 })();
 </script>
 
